@@ -1,1 +1,863 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perfil - Meu Manhwa</title>
 
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#fff;
+  color:#171717;
+  padding-bottom:80px;
+}
+
+.top{
+  height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  border-bottom:1px solid #eee;
+  position:sticky;
+  top:0;
+  background:#fff;
+  z-index:10;
+}
+
+.top button{
+  border:0;
+  background:none;
+  font-size:25px;
+}
+
+.top h1{
+  margin:0;
+  font-size:19px;
+}
+
+.profile{
+  max-width:700px;
+  margin:auto;
+  padding:25px 18px;
+}
+
+/* PERFIL */
+
+.profile-head{
+  text-align:center;
+}
+
+.avatar{
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  background:#e9e9e9;
+  margin:auto;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  border:3px solid #fff;
+  box-shadow:0 2px 12px #ddd;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.name{
+  font-size:23px;
+  margin:13px 0 5px;
+}
+
+.bio{
+  color:#777;
+  font-size:14px;
+  max-width:400px;
+  margin:0 auto 18px;
+  line-height:1.5;
+}
+
+/* NÚMEROS */
+
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:35px;
+  margin:20px 0;
+}
+
+.stat{
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:18px;
+}
+
+.stat span{
+  color:#777;
+  font-size:12px;
+}
+
+/* BOTÕES */
+
+.profile-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+
+.profile-actions button{
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:12px;
+  padding:11px 18px;
+  font-weight:bold;
+}
+
+.edit{
+  background:#171717 !important;
+  color:#fff;
+}
+
+/* GRUPO */
+
+.group{
+  margin-top:25px;
+  border:1px solid #e5e5e5;
+  border-radius:18px;
+  padding:18px;
+  background:#fafafa;
+}
+
+.group h2{
+  margin:0 0 5px;
+  font-size:18px;
+}
+
+.group p{
+  margin:0 0 15px;
+  color:#777;
+  font-size:13px;
+}
+
+.social{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.social button{
+  flex:1;
+  min-width:90px;
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:12px;
+  padding:12px 8px;
+  font-weight:bold;
+}
+
+/* CATEGORIAS */
+
+.tabs{
+  display:flex;
+  overflow-x:auto;
+  margin-top:30px;
+  border-bottom:1px solid #ddd;
+}
+
+.tabs button{
+  flex:0 0 auto;
+  border:0;
+  background:none;
+  padding:14px 15px;
+  font-weight:bold;
+  color:#777;
+}
+
+.tabs button.active{
+  color:#111;
+  border-bottom:2px solid #111;
+}
+
+.content{
+  padding-top:20px;
+}
+
+.empty{
+  text-align:center;
+  padding:45px 20px;
+  color:#777;
+  border:1px dashed #ccc;
+  border-radius:18px;
+}
+
+.empty div{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:100;
+  overflow-y:auto;
+  padding:20px;
+}
+
+.modal-box{
+  background:#fff;
+  max-width:500px;
+  margin:auto;
+  border-radius:22px;
+  padding:22px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.modal-head h2{
+  margin:0;
+}
+
+.close{
+  border:0;
+  background:#eee;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  font-size:20px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  font-size:13px;
+  margin:17px 0 7px;
+}
+
+input,textarea{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:11px;
+  font-family:Arial;
+}
+
+textarea{
+  min-height:90px;
+  resize:vertical;
+}
+
+.save{
+  width:100%;
+  margin-top:20px;
+  padding:15px;
+  border:0;
+  border-radius:13px;
+  background:#171717;
+  color:#fff;
+  font-weight:bold;
+}
+
+/* CONFIGURAÇÕES */
+
+.settings-list{
+  display:none;
+}
+
+.setting{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:17px 5px;
+  border-bottom:1px solid #eee;
+}
+
+.setting-left strong{
+  display:block;
+  font-size:15px;
+}
+
+.setting-left span{
+  color:#888;
+  font-size:12px;
+}
+
+.setting button{
+  border:1px solid #ddd;
+  background:#fff;
+  border-radius:10px;
+  padding:8px 12px;
+}
+
+.danger{
+  color:#d00;
+}
+
+/* BARRA */
+
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:75px;
+  background:#fff;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:50;
+}
+
+.bottom button{
+  border:0;
+  background:none;
+  color:#777;
+  font-size:20px;
+}
+
+.bottom small{
+  display:block;
+  font-size:10px;
+  margin-top:4px;
+}
+
+.bottom .active{
+  color:#111;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
+
+  <button onclick="goBack()">←</button>
+
+  <h1 id="topTitle">Perfil</h1>
+
+  <button onclick="openSettings()">⚙️</button>
+
+</header>
+
+
+<main class="profile">
+
+  <!-- PERFIL -->
+
+  <section id="profilePage">
+
+    <div class="profile-head">
+
+      <div class="avatar" id="avatar">
+        ♙
+      </div>
+
+      <h2 class="name" id="profileName">
+        Meu Perfil
+      </h2>
+
+      <p class="bio" id="profileBio">
+        Adicione uma biografia ao seu perfil.
+      </p>
+
+    </div>
+
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="followers">0</strong>
+        <span>Seguidores</span>
+      </div>
+
+      <div class="stat">
+        <strong id="following">0</strong>
+        <span>Seguindo</span>
+      </div>
+
+      <div class="stat">
+        <strong id="likes">0</strong>
+        <span>Curtidas</span>
+      </div>
+
+    </div>
+
+
+    <div class="profile-actions">
+
+      <button class="edit" onclick="openEdit()">
+        Editar perfil
+      </button>
+
+    </div>
+
+
+    <!-- GRUPO MEGA -->
+
+    <section class="group">
+
+      <h2>👥 Grupo Mega</h2>
+
+      <p>
+        Conecte suas redes sociais ao seu perfil.
+      </p>
+
+      <div class="social">
+
+        <button onclick="connect('Instagram')">
+          Instagram
+        </button>
+
+        <button onclick="connect('WhatsApp')">
+          WhatsApp
+        </button>
+
+        <button onclick="connect('Telegram')">
+          Telegram
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- CATEGORIAS -->
+
+    <div class="tabs">
+
+      <button class="active" onclick="showTab('Minhu',this)">
+        Minhu
+      </button>
+
+      <button onclick="showTab('Manhwa',this)">
+        Manhwa
+      </button>
+
+      <button onclick="showTab('Manhua',this)">
+        Manhua
+      </button>
+
+      <button onclick="showTab('Mangá',this)">
+        Mangá
+      </button>
+
+      <button onclick="showTab('Novel',this)">
+        Novel
+      </button>
+
+    </div>
+
+
+    <div class="content">
+
+      <div class="empty" id="tabContent">
+
+        <div>✦</div>
+
+        <strong>Nenhuma publicação ainda</strong>
+
+        <p>
+          Suas publicações aparecerão aqui.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONFIGURAÇÕES -->
+
+  <section class="settings-list" id="settingsPage">
+
+    <div class="setting">
+
+      <div class="setting-left">
+        <strong>👤 Conta</strong>
+        <span>Gerenciar sua conta</span>
+      </div>
+
+      <button>›</button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="setting-left">
+        <strong>📧 E-mail e senha</strong>
+        <span>Alterar dados de acesso</span>
+      </div>
+
+      <button>›</button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="setting-left">
+        <strong>📱 Número de celular</strong>
+        <span>Adicionar ou alterar número</span>
+      </div>
+
+      <button>›</button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="setting-left">
+        <strong>🌙 Tema</strong>
+        <span id="themeText">Claro</span>
+      </div>
+
+      <button onclick="toggleTheme()">
+        Alterar
+      </button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="setting-left">
+        <strong>🚪 Sair da conta</strong>
+        <span>Encerrar sua sessão</span>
+      </div>
+
+      <button onclick="logout()">Sair</button>
+
+    </div>
+
+
+    <div class="setting">
+
+      <div class="setting-left">
+        <strong class="danger">🗑️ Excluir conta</strong>
+        <span>Excluir permanentemente</span>
+      </div>
+
+      <button onclick="deleteAccount()">Excluir</button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- EDITAR PERFIL -->
+
+<div class="modal" id="editModal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2>Editar perfil</h2>
+
+      <button class="close" onclick="closeEdit()">×</button>
+
+    </div>
+
+
+    <label>Foto de perfil</label>
+
+    <input
+      type="file"
+      id="photo"
+      accept="image/*"
+      onchange="previewAvatar(this)"
+    >
+
+
+    <label>Nome</label>
+
+    <input
+      id="editName"
+      type="text"
+      placeholder="Nome do perfil"
+    >
+
+
+    <label>Biografia</label>
+
+    <textarea
+      id="editBio"
+      placeholder="Escreva sua biografia..."
+    ></textarea>
+
+
+    <button class="save" onclick="saveProfile()">
+      Salvar alterações
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- BARRA INFERIOR -->
+
+<nav class="bottom">
+
+  <button onclick="go('index.html')">
+    ⌂
+    <small>Início</small>
+  </button>
+
+  <button onclick="go('feed.html')">
+    ♡
+    <small>Feed</small>
+  </button>
+
+  <button onclick="go('descobrir.html')">
+    ◈
+    <small>Descobrir</small>
+  </button>
+
+  <button onclick="go('estudio.html')">
+    ▣
+    <small>Meu Estúdio</small>
+  </button>
+
+  <button class="active">
+    ♙
+    <small>Perfil</small>
+  </button>
+
+</nav>
+
+
+<script>
+
+/* VOLTAR */
+
+function goBack(){
+
+  window.history.back();
+
+}
+
+
+/* NAVEGAÇÃO */
+
+function go(page){
+
+  window.location.href=page;
+
+}
+
+
+/* EDITAR PERFIL */
+
+function openEdit(){
+
+  document.getElementById("editName").value =
+    document.getElementById("profileName").textContent;
+
+  document.getElementById("editBio").value =
+    document.getElementById("profileBio").textContent;
+
+  document.getElementById("editModal").style.display="block";
+
+}
+
+
+function closeEdit(){
+
+  document.getElementById("editModal").style.display="none";
+
+}
+
+
+/* FOTO */
+
+function previewAvatar(input){
+
+  const file=input.files[0];
+
+  if(!file) return;
+
+  const img=document.createElement("img");
+
+  img.src=URL.createObjectURL(file);
+
+  document.getElementById("avatar").innerHTML="";
+
+  document.getElementById("avatar").appendChild(img);
+
+}
+
+
+/* SALVAR PERFIL */
+
+function saveProfile(){
+
+  const name=document.getElementById("editName").value.trim();
+
+  const bio=document.getElementById("editBio").value.trim();
+
+  if(name){
+
+    document.getElementById("profileName").textContent=name;
+
+  }
+
+  if(bio){
+
+    document.getElementById("profileBio").textContent=bio;
+
+  }
+
+  closeEdit();
+
+}
+
+
+/* CATEGORIAS */
+
+function showTab(name,button){
+
+  document.querySelectorAll(".tabs button")
+    .forEach(function(btn){
+      btn.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+  const content=document.getElementById("tabContent");
+
+  if(name==="Minhu"){
+
+    content.innerHTML=`
+      <div>✦</div>
+      <strong>Nenhuma publicação ainda</strong>
+      <p>Suas mídias aparecerão aqui.</p>
+    `;
+
+  }else{
+
+    content.innerHTML=`
+      <div>📖</div>
+      <strong>Nenhuma obra em ${name}</strong>
+      <p>As suas obras aparecerão aqui.</p>
+    `;
+
+  }
+
+}
+
+
+/* GRUPO */
+
+function connect(service){
+
+  alert(
+    "Conexão com "+service+
+    " será configurada aqui."
+  );
+
+}
+
+
+/* CONFIGURAÇÕES */
+
+function openSettings(){
+
+  document.getElementById("profilePage").style.display="none";
+
+  document.getElementById("settingsPage").style.display="block";
+
+  document.getElementById("topTitle").textContent="Configurações";
+
+}
+
+
+function toggleTheme(){
+
+  document.body.classList.toggle("dark");
+
+  const dark=
+    document.body.classList.contains("dark");
+
+  document.getElementById("themeText").textContent=
+    dark ? "Escuro" : "Claro";
+
+  if(dark){
+
+    document.body.style.background="#111";
+
+    document.body.style.color="#fff";
+
+  }else{
+
+    document.body.style.background="#fff";
+
+    document.body.style.color="#171717";
+
+  }
+
+}
+
+
+/* SAIR */
+
+function logout(){
+
+  if(confirm("Deseja sair da conta?")){
+
+    alert("Você saiu da conta.");
+
+  }
+
+}
+
+
+/* EXCLUIR */
+
+function deleteAccount(){
+
+  const confirmDelete=
+    confirm(
+      "Tem certeza que deseja excluir sua conta?"
+    );
+
+  if(confirmDelete){
+
+    alert(
+      "A exclusão da conta será realizada."
+    );
+
+  }
+
+}
+
+</script>
+
+</body>
+  </html>
