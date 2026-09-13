@@ -5,6 +5,67 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Meu Manhwa</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .home-posts {
+      margin-top: 25px;
+    }
+
+    .home-post {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 18px;
+      padding: 12px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    .home-post-media {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #eee;
+    }
+
+    .home-post-media img,
+    .home-post-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .home-post-caption {
+      padding: 12px 5px 5px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .home-post-author {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .home-empty {
+      text-align: center;
+      padding: 30px 15px;
+      color: #888;
+      border: 1px dashed #ccc;
+      border-radius: 18px;
+    }
+
+    body.dark .home-post {
+      background: #1b1b1b;
+      border-color: #333;
+      color: #fff;
+    }
+
+    body.dark .home-empty {
+      border-color: #444;
+      color: #aaa;
+    }
+  </style>
 </head>
 
 <body>
@@ -14,7 +75,7 @@
 
     <div class="header-actions">
       <button>⌕</button>
-      <button>♙</button>
+      <button onclick="openScreen('perfil.html')">♙</button>
     </div>
   </header>
 
@@ -29,10 +90,16 @@
 
       <div class="hero-text">
         <span>SEU UNIVERSO</span>
-        <h1>Leia.<br>Crie.<br>Viva histórias.</h1>
-        <p>Descubra novos manhwas e acompanhe suas histórias favoritas.</p>
 
-        <button class="discover-btn">
+        <h1>Leia.<br>Crie.<br>Viva histórias.</h1>
+
+        <p>
+          Descubra novos manhwas e acompanhe suas histórias favoritas.
+        </p>
+
+        <button
+          class="discover-btn"
+          onclick="openScreen('descobrir.html')">
           Descobrir manhwas →
         </button>
       </div>
@@ -47,13 +114,37 @@
       </div>
     </section>
 
+
+    <!-- PUBLICAÇÕES RECENTES -->
+
+    <section class="section home-posts">
+
+      <div class="section-title">
+        <h2>Publicações recentes</h2>
+        <button onclick="openScreen('feed.html')">
+          Ver tudo →
+        </button>
+      </div>
+
+      <div id="homePosts"></div>
+
+    </section>
+
+
+    <!-- DESTAQUES -->
+
     <section class="section">
+
       <div class="section-title">
         <h2>Em destaque</h2>
-        <button>Ver tudo →</button>
+
+        <button onclick="openScreen('descobrir.html')">
+          Ver tudo →
+        </button>
       </div>
 
       <div class="cards">
+
         <div class="manhwa-card">
           <div class="cover">♡</div>
           <b>Histórias populares</b>
@@ -71,50 +162,156 @@
           <b>Para você</b>
           <small>Recomendados</small>
         </div>
+
       </div>
+
     </section>
 
+
+    <!-- CONTINUE LENDO -->
+
     <section class="section latest">
+
       <div class="section-title">
         <h2>Continue lendo</h2>
-        <button>Ver biblioteca →</button>
+
+        <button>
+          Ver biblioteca →
+        </button>
       </div>
 
       <div class="empty-reading">
         <span>✧</span>
+
         <h3>Nada por aqui ainda</h3>
-        <p>Comece a ler um manhwa e ele aparecerá aqui.</p>
+
+        <p>
+          Comece a ler um manhwa e ele aparecerá aqui.
+        </p>
       </div>
+
     </section>
 
   </main>
 
+
+  <!-- MENU INFERIOR -->
+
   <nav class="bottom">
+
     <button class="active">
       ⌂
       <small>Início</small>
     </button>
 
-    <button>
+    <button onclick="openScreen('feed.html')">
       ♧
       <small>Feed</small>
     </button>
 
-    <button>
+    <button onclick="openScreen('descobrir.html')">
       ◈
       <small>Descobrir</small>
     </button>
 
     <button onclick="openScreen('estudio.html')">
-  ▣
-  <small>Meu Estúdio</small>
-      </button>
+      ▣
+      <small>Meu Estúdio</small>
+    </button>
 
-    <<button onclick="openScreen('perfil.html')">
-  ♙
-  <small>Perfil</small>
-                                      </button>
+    <button onclick="openScreen('perfil.html')">
+      ♙
+      <small>Perfil</small>
+    </button>
+
   </nav>
-<script src="app.js"></script>
+
+
+  <script src="app.js"></script>
+
+  <script>
+
+    function carregarPublicacoesInicio() {
+
+      const area = document.getElementById("homePosts");
+
+      const publicacoes =
+        JSON.parse(
+          localStorage.getItem("minhas_publicacoes") || "[]"
+        );
+
+      if (!publicacoes.length) {
+
+        area.innerHTML = `
+          <div class="home-empty">
+            <div style="font-size:35px;">✦</div>
+            <strong>Nenhuma publicação ainda</strong>
+            <p>
+              As publicações dos criadores aparecerão aqui.
+            </p>
+          </div>
+        `;
+
+        return;
+      }
+
+
+      area.innerHTML = publicacoes
+        .slice()
+        .reverse()
+        .map(function(post) {
+
+          let media = "";
+
+          if (post.type === "video") {
+
+            media = `
+              <video
+                src="${post.media}"
+                controls
+                playsinline>
+              </video>
+            `;
+
+          } else {
+
+            media = `
+              <img
+                src="${post.media}"
+                alt="Publicação">
+            `;
+          }
+
+
+          return `
+            <article class="home-post">
+
+              <div class="home-post-media">
+                ${media}
+              </div>
+
+              <div class="home-post-caption">
+
+                <div class="home-post-author">
+                  ${post.author || "Criador"}
+                </div>
+
+                ${post.caption || ""}
+
+              </div>
+
+            </article>
+          `;
+
+        })
+        .join("");
+
+    }
+
+
+    carregarPublicacoesInicio();
+
+  </script>
+
 </body>
-          </html>
+      </html>
