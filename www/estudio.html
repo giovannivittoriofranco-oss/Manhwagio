@@ -1,10 +1,11 @@
 <!doctype html>
-
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Meu Estúdio</title><style>
+<title>Meu Estúdio</title>
+
+<style>
 *{box-sizing:border-box}
 
 body{
@@ -45,8 +46,6 @@ max-width:800px;
 margin:auto;
 padding:20px
 }
-
-/* ABAS DO ESTÚDIO */
 
 .studio-tabs{
 display:flex;
@@ -126,8 +125,6 @@ color:#777;
 font-size:14px
 }
 
-/* RASCUNHOS */
-
 .draft{
 border:1px solid #e5e5e5;
 border-radius:18px;
@@ -161,8 +158,6 @@ border-radius:10px;
 padding:10px;
 font-weight:bold
 }
-
-/* PUBLICAR */
 
 .publish-card{
 border:1px solid #e5e5e5;
@@ -204,7 +199,8 @@ padding:13px;
 border:1px solid #ddd;
 border-radius:12px;
 background:#fff;
-font-weight:bold
+font-weight:bold;
+cursor:pointer
 }
 
 .publish-actions{
@@ -229,8 +225,6 @@ background:#eee
 background:#171717;
 color:#fff
 }
-
-/* MODAL OBRA */
 
 .modal{
 display:none;
@@ -326,8 +320,6 @@ border:1px dashed #ccc;
 border-radius:18px
 }
 
-/* BARRA */
-
 .bottom{
 position:fixed;
 bottom:0;
@@ -346,7 +338,8 @@ z-index:10
 border:0;
 background:none;
 color:#777;
-font-size:21px
+font-size:21px;
+cursor:pointer
 }
 
 .bottom small{
@@ -359,130 +352,231 @@ margin-top:3px
 color:#111;
 font-weight:bold
 }
-</style></head><body><header>
+</style>
+</head>
+
+<body>
+
+<header>
 <button class="back" onclick="history.back()">←</button>
 <h1>Meu Estúdio</h1>
-</header><main><!-- ABAS --><div class="studio-tabs"><button class="active" onclick="abrirAba('obras',this)">
+</header>
+
+<main>
+
+<div class="studio-tabs">
+
+<button class="active" onclick="abrirAba('obras',this)">
 📚 Obras
-</button><button onclick="abrirAba('rascunhos',this)">
+</button>
+
+<button onclick="abrirAba('rascunhos',this)">
 📝 Rascunhos
-</button><button onclick="abrirAba('publicar',this)">
+</button>
+
+<button onclick="abrirAba('publicar',this)">
 📤 Publicar
-</button></div><!-- OBRAS --><section class="section active" id="obrasSection"><button class="add" onclick="abrirFormulario()">
+</button>
+
+</div>
+
+<section class="section active" id="obrasSection">
+
+<button class="add" onclick="abrirFormulario()">
 ＋ Adicionar Nova Obra
-</button><div class="obras" id="obras"></div></section><!-- RASCUNHOS --><section class="section" id="rascunhosSection"><div id="rascunhos"></div></section><!-- PUBLICAR --><section class="section" id="publicarSection"><div class="publish-card"><h2>Nova publicação</h2><p style="color:#777;font-size:13px">
+</button>
+
+<div class="obras" id="obras"></div>
+
+</section>
+
+<section class="section" id="rascunhosSection">
+<div id="rascunhos"></div>
+</section>
+
+<section class="section" id="publicarSection">
+
+<div class="publish-card">
+
+<h2>Nova publicação</h2>
+
+<p style="color:#777;font-size:13px">
 Publique uma imagem ou vídeo no seu perfil.
-</p><div class="media-preview" id="mediaPreview">
+</p>
+
+<div class="media-preview" id="mediaPreview">
 Escolha uma imagem ou vídeo
-</div><div class="media-buttons"><button onclick="document.getElementById('imagemPost').click()">
+</div>
+
+<div class="media-buttons">
+
+<button type="button" onclick="document.getElementById('imagemPost').click()">
 🖼️ Imagem
-</button><button onclick="document.getElementById('videoPost').click()">
+</button>
+
+<button type="button" onclick="document.getElementById('videoPost').click()">
 🎥 Vídeo
-</button></div><input
+</button>
+
+</div>
+
+<input
 type="file"
 id="imagemPost"
 accept="image/*"
 style="display:none"
 onchange="selecionarImagem(event)"
-
-«»
+>
 
 <input
 type="file"
 id="videoPost"
-accept="video/*"
+accept="video/*,.mp4,.webm,.mov,.m4v"
 style="display:none"
 onchange="selecionarVideo(event)"
-
-«»
+>
 
 <label>Legenda</label>
 
 <textarea
 id="legendaPost"
 placeholder="Escreva uma legenda para sua publicação..."
-></textarea><div class="publish-actions"><button class="draft-btn" onclick="salvarRascunho()">
-📝 Salvar rascunho
-</button><button class="publish-btn" onclick="publicarPost()">
-📤 Publicar
-</button></div></div></section></main><!-- MODAL NOVA OBRA --><div class="modal" id="modal"><div class="box"><h2>Nova obra</h2><label>Tipo</label>
+></textarea>
 
-<select id="tipo"><option>Manhwa</option>
+<div class="publish-actions">
+
+<button class="draft-btn" onclick="salvarRascunho()">
+📝 Salvar rascunho
+</button>
+
+<button class="publish-btn" onclick="publicarPost()">
+📤 Publicar
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<div class="modal" id="modal">
+
+<div class="box">
+
+<h2>Nova obra</h2>
+
+<label>Tipo</label>
+
+<select id="tipo">
+<option>Manhwa</option>
 <option>Manhua</option>
 <option>Mangá</option>
-<option>Novel</option></select><label>Título</label>
+<option>Novel</option>
+</select>
+
+<label>Título</label>
 
 <input
 id="titulo"
 placeholder="Nome da obra"
-
-«»
+>
 
 <label>Introdução</label>
 
 <textarea
 id="introducao"
 placeholder="Uma breve introdução"
-></textarea><label>Descrição</label>
+></textarea>
+
+<label>Descrição</label>
 
 <textarea
 id="descricao"
 placeholder="Descrição da história"
-></textarea><label>Gêneros</label>
+></textarea>
+
+<label>Gêneros</label>
 
 <input
 id="generos"
 placeholder="Romance, BL, Drama..."
-
-«»
+>
 
 <label>Classificação</label>
 
-<select id="idade"><option>Livre</option>
+<select id="idade">
+<option>Livre</option>
 <option>10 anos</option>
 <option>12 anos</option>
 <option>14 anos</option>
 <option>16 anos</option>
-<option>18 anos</option></select><label>Capa</label>
+<option>18 anos</option>
+</select>
+
+<label>Capa</label>
 
 <input
 type="file"
 id="capa"
 accept="image/*"
 onchange="mostrarCapa(event)"
-
-«»
+>
 
 <div class="preview" id="preview">
 Capa
-</div><div class="actions"><button class="cancel" onclick="fecharFormulario()">
+</div>
+
+<div class="actions">
+
+<button class="cancel" onclick="fecharFormulario()">
 Cancelar
-</button><button class="save" onclick="salvarObra()">
+</button>
+
+<button class="save" onclick="salvarObra()">
 Salvar obra
-</button></div></div>
-</div><nav class="bottom"><button onclick="location.href='index.html'">
+</button>
+
+</div>
+
+</div>
+</div>
+
+<nav class="bottom">
+
+<button onclick="location.href='index.html'">
 ⌂
 <small>Início</small>
-</button><button onclick="location.href='feed.html'">
+</button>
+
+<button onclick="location.href='feed.html'">
 ♧
 <small>Feed</small>
-</button><button onclick="location.href='descobrir.html'">
+</button>
+
+<button onclick="location.href='descobrir.html'">
 ◈
 <small>Descobrir</small>
-</button><button class="active">
+</button>
+
+<button class="active">
 ▣
 <small>Meu Estúdio</small>
-</button><button onclick="location.href='perfil.html'">
+</button>
+
+<button onclick="location.href='perfil.html'">
 ♙
 <small>Perfil</small>
-</button></nav><script>
+</button>
+
+</nav>
+
+<script>
 
 let capaAtual="";
-
 let mediaPostAtual="";
-
 let tipoMediaPost="";
-
 
 /* ABAS */
 
@@ -527,7 +621,6 @@ document.getElementById("publicarSection")
 
 }
 
-
 /* OBRAS */
 
 function abrirFormulario(){
@@ -536,13 +629,11 @@ document.getElementById("modal").style.display="block";
 
 }
 
-
 function fecharFormulario(){
 
 document.getElementById("modal").style.display="none";
 
 }
-
 
 function mostrarCapa(event){
 
@@ -564,7 +655,6 @@ document.getElementById("preview").innerHTML=
 leitor.readAsDataURL(arquivo);
 
 }
-
 
 function salvarObra(){
 
@@ -627,7 +717,6 @@ alert("Obra salva com sucesso!");
 
 }
 
-
 function mostrarObras(){
 
 const obras=
@@ -651,23 +740,18 @@ container.innerHTML="";
 
 obras.forEach(obra=>{
 
-const div=
-document.createElement("div");
+const div=document.createElement("div");
 
 div.className="obra";
 
 div.innerHTML=`
 
-${obra.capa
-
+${
+obra.capa
 ?
-
 '<img src="'+obra.capa+'">'
-
 :
-
 '<div style="width:90px;height:125px;border-radius:12px;background:#eee;display:flex;align-items:center;justify-content:center">♡</div>'
-
 }
 
 <div class="obra-info">
@@ -697,7 +781,6 @@ container.appendChild(div);
 
 }
 
-
 function limparFormulario(){
 
 document.getElementById("titulo").value="";
@@ -710,7 +793,6 @@ document.getElementById("preview").innerHTML="Capa";
 capaAtual="";
 
 }
-
 
 /* PUBLICAÇÃO */
 
@@ -737,7 +819,6 @@ leitor.readAsDataURL(arquivo);
 
 }
 
-
 function selecionarVideo(event){
 
 const arquivo=event.target.files[0];
@@ -753,7 +834,7 @@ leitor.onload=function(e){
 mediaPostAtual=e.target.result;
 
 document.getElementById("mediaPreview").innerHTML=
-'<video src="'+mediaPostAtual+'" controls></video>';
+'<video src="'+mediaPostAtual+'" controls playsinline></video>';
 
 };
 
@@ -761,8 +842,7 @@ leitor.readAsDataURL(arquivo);
 
 }
 
-
-/* SALVAR RASCUNHO */
+/* RASCUNHO */
 
 function salvarRascunho(){
 
@@ -816,9 +896,6 @@ document.querySelectorAll(".studio-tabs button")[1]
 
 }
 
-
-/* MOSTRAR RASCUNHOS */
-
 function mostrarRascunhos(){
 
 const container=
@@ -870,13 +947,15 @@ div.innerHTML=`
 
 ${rascunho.type==="video"?"🎥 Vídeo":"🖼️ Imagem"}
 
-${rascunho.caption
+${
+rascunho.caption
 ?
 " · "+escapeHTML(
 rascunho.caption.substring(0,80)
 )
 :
-""}
+""
+}
 
 </div>
 
@@ -899,9 +978,6 @@ container.appendChild(div);
 });
 
 }
-
-
-/* EDITAR RASCUNHO */
 
 function editarRascunho(index){
 
@@ -926,7 +1002,7 @@ if(rascunho.media){
 if(rascunho.type==="video"){
 
 document.getElementById("mediaPreview").innerHTML=
-'<video src="'+rascunho.media+'" controls></video>';
+'<video src="'+rascunho.media+'" controls playsinline></video>';
 
 }else{
 
@@ -951,7 +1027,6 @@ document.querySelectorAll(".studio-tabs button")[2]
 
 }
 
-
 function excluirRascunho(index){
 
 if(!confirm("Excluir este rascunho?"))return;
@@ -971,7 +1046,6 @@ JSON.stringify(rascunhos)
 mostrarRascunhos();
 
 }
-
 
 /* PUBLICAR */
 
@@ -1027,19 +1101,15 @@ limparPublicacao();
 
 }
 
-
 /* LIMPAR */
 
 function limparPublicacao(){
 
 mediaPostAtual="";
-
 tipoMediaPost="";
 
 document.getElementById("imagemPost").value="";
-
 document.getElementById("videoPost").value="";
-
 document.getElementById("legendaPost").value="";
 
 document.getElementById("mediaPreview").innerHTML=
@@ -1047,8 +1117,7 @@ document.getElementById("mediaPreview").innerHTML=
 
 }
 
-
-/* SEGURANÇA DE TEXTO */
+/* SEGURANÇA */
 
 function escapeHTML(text){
 
@@ -1070,12 +1139,12 @@ return {
 
 }
 
-
 /* INICIAR */
 
 mostrarObras();
-
 mostrarRascunhos();
 
-</script></body>
+</script>
+
+</body>
   </html>
