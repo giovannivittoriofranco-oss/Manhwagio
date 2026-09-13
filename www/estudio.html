@@ -3,1146 +3,608 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Meu Estúdio</title>
+<title>Meu Manhwa</title>
+
+<link rel="stylesheet" href="style.css">
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#fff;
-color:#171717;
-padding-bottom:85px
+  margin:0;
+  padding-bottom:85px;
+  color:#171717;
 }
 
-header{
-height:64px;
-display:flex;
-align-items:center;
-padding:0 18px;
-border-bottom:1px solid #eee;
-gap:15px;
-position:sticky;
-top:0;
-background:#fff;
-z-index:5
+.home-header{
+  padding:18px 16px 10px;
 }
 
-.back{
-border:0;
-background:none;
-font-size:28px;
-cursor:pointer
+.top-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-header h1{
-font-size:20px;
-margin:0
+.app-logo{
+  font-size:23px;
+  font-weight:800;
 }
 
-main{
-max-width:800px;
-margin:auto;
-padding:20px
+.settings-btn{
+  border:0;
+  background:none;
+  font-size:24px;
+  cursor:pointer;
 }
 
-.studio-tabs{
-display:flex;
-gap:8px;
-overflow-x:auto;
-margin-bottom:20px;
-padding-bottom:3px
+.search-box{
+  margin-top:15px;
 }
 
-.studio-tabs button{
-border:1px solid #ddd;
-background:#fff;
-border-radius:13px;
-padding:11px 16px;
-font-weight:bold;
-white-space:nowrap
+.search-box input{
+  width:100%;
+  padding:14px 16px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  font-size:15px;
+  outline:none;
+  background:white;
 }
 
-.studio-tabs button.active{
-background:#171717;
-color:#fff;
-border-color:#171717
+.categories{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:14px 0 5px;
+}
+
+.categories button{
+  border:1px solid #ddd;
+  background:white;
+  border-radius:20px;
+  padding:9px 15px;
+  white-space:nowrap;
+  font-weight:bold;
+}
+
+.categories button.active{
+  background:#171717;
+  color:white;
+}
+
+.home{
+  padding:0 16px;
+  max-width:1000px;
+  margin:auto;
 }
 
 .section{
-display:none
+  margin-top:20px;
 }
 
-.section.active{
-display:block
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
 }
 
-.add{
-width:100%;
-padding:17px;
-border:0;
-border-radius:16px;
-background:#171717;
-color:white;
-font-size:16px;
-font-weight:bold;
-cursor:pointer
+.section-title h2{
+  margin:0;
+  font-size:20px;
 }
 
-.obras{
-margin-top:25px
+.section-title button{
+  border:0;
+  background:none;
+  font-weight:bold;
 }
 
-.obra{
-border:1px solid #e5e5e5;
-border-radius:18px;
-padding:12px;
-margin-bottom:15px;
-display:flex;
-gap:14px;
-background:white
+.obras-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
 }
 
-.obra img{
-width:90px;
-height:125px;
-object-fit:cover;
-border-radius:12px;
-background:#eee
+.obra-card{
+  background:white;
+  border:1px solid #e5e5e5;
+  border-radius:15px;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.obra-capa{
+  width:100%;
+  aspect-ratio:2/3;
+  object-fit:cover;
+  background:#eee;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#aaa;
 }
 
 .obra-info{
-flex:1
+  padding:9px;
 }
 
 .obra-info h3{
-margin:5px 0 8px
+  margin:2px 0 5px;
+  font-size:14px;
 }
 
-.obra-info p{
-color:#777;
-font-size:14px
+.obra-info small{
+  color:#777;
+  font-size:11px;
 }
 
-.draft{
-border:1px solid #e5e5e5;
-border-radius:18px;
-padding:16px;
-margin-bottom:12px;
-background:#fff
+.empty-obras{
+  padding:30px 15px;
+  text-align:center;
+  background:white;
+  border:1px dashed #ccc;
+  border-radius:16px;
+  color:#888;
 }
 
-.draft-title{
-font-weight:bold;
-font-size:16px
+.minhu-box{
+  background:white;
+  border:1px solid #e5e5e5;
+  border-radius:17px;
+  padding:16px;
 }
 
-.draft-info{
-color:#777;
-font-size:13px;
-margin-top:6px
+.minhu-box h3{
+  margin:0 0 6px;
 }
 
-.draft-buttons{
-display:flex;
-gap:8px;
-margin-top:12px
+.minhu-box p{
+  margin:0 0 12px;
+  color:#777;
+  font-size:14px;
 }
 
-.draft-buttons button{
-flex:1;
-border:1px solid #ddd;
-background:#fff;
-border-radius:10px;
-padding:10px;
-font-weight:bold
-}
-
-.publish-card{
-border:1px solid #e5e5e5;
-border-radius:20px;
-padding:18px;
-background:#fff
-}
-
-.media-preview{
-width:100%;
-max-width:420px;
-aspect-ratio:4/5;
-margin:12px auto;
-border-radius:16px;
-background:#f1f1f1;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-color:#888
-}
-
-.media-preview img,
-.media-preview video{
-width:100%;
-height:100%;
-object-fit:cover
-}
-
-.media-buttons{
-display:flex;
-gap:8px;
-margin-top:10px
-}
-
-.media-buttons button{
-flex:1;
-padding:13px;
-border:1px solid #ddd;
-border-radius:12px;
-background:#fff;
-font-weight:bold;
-cursor:pointer
-}
-
-.publish-actions{
-display:flex;
-gap:10px;
-margin-top:15px
-}
-
-.publish-actions button{
-flex:1;
-padding:14px;
-border:0;
-border-radius:13px;
-font-weight:bold
-}
-
-.draft-btn{
-background:#eee
-}
-
-.publish-btn{
-background:#171717;
-color:#fff
-}
-
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.45);
-z-index:20;
-overflow:auto
-}
-
-.box{
-background:white;
-width:92%;
-max-width:600px;
-margin:30px auto;
-padding:22px;
-border-radius:22px
-}
-
-.box h2{
-margin-top:0
-}
-
-label{
-display:block;
-font-size:14px;
-font-weight:bold;
-margin-top:15px;
-margin-bottom:6px
-}
-
-input,
-textarea,
-select{
-width:100%;
-padding:13px;
-border:1px solid #ddd;
-border-radius:12px;
-font-size:15px
-}
-
-textarea{
-min-height:100px;
-resize:vertical
-}
-
-.preview{
-width:120px;
-height:160px;
-border-radius:12px;
-background:#f1f1f1;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-margin-top:8px
-}
-
-.preview img{
-width:100%;
-height:100%;
-object-fit:cover
-}
-
-.actions{
-display:flex;
-gap:10px;
-margin-top:20px
-}
-
-.actions button{
-flex:1;
-padding:14px;
-border:0;
-border-radius:13px;
-font-weight:bold
-}
-
-.cancel{
-background:#eee
-}
-
-.save{
-background:#171717;
-color:white
-}
-
-.empty{
-text-align:center;
-padding:45px 15px;
-color:#888;
-border:1px dashed #ccc;
-border-radius:18px
+.minhu-box button{
+  border:0;
+  background:#171717;
+  color:white;
+  padding:11px 15px;
+  border-radius:12px;
+  font-weight:bold;
 }
 
 .bottom{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-height:72px;
-background:white;
-border-top:1px solid #ddd;
-display:flex;
-justify-content:space-around;
-align-items:center;
-z-index:10
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:72px;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  z-index:20;
 }
 
 .bottom button{
-border:0;
-background:none;
-color:#777;
-font-size:21px;
-cursor:pointer
+  border:0;
+  background:none;
+  color:#777;
+  font-size:21px;
+  cursor:pointer;
 }
 
 .bottom small{
-display:block;
-font-size:10px;
-margin-top:3px
+  display:block;
+  font-size:10px;
+  margin-top:3px;
 }
 
 .bottom .active{
-color:#111;
-font-weight:bold
+  color:#111;
+  font-weight:bold;
+}
+
+@media(max-width:500px){
+  .obras-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<button class="back" onclick="history.back()">←</button>
-<h1>Meu Estúdio</h1>
+<header class="home-header">
+
+  <div class="top-line">
+
+    <div class="app-logo">
+      ✦ Meu Manhwa
+    </div>
+
+    <button
+      class="settings-btn"
+      onclick="location.href='configuracoes.html'"
+    >
+      ⚙️
+    </button>
+
+  </div>
+
+  <div class="search-box">
+
+    <input
+      id="pesquisa"
+      type="search"
+      placeholder="Pesquisar obras..."
+      oninput="filtrarObras()"
+    >
+
+  </div>
+
+  <div class="categories">
+
+    <button
+      class="active"
+      onclick="filtrarCategoria('Todos',this)"
+    >
+      Todos
+    </button>
+
+    <button
+      onclick="filtrarCategoria('Manhwa',this)"
+    >
+      Manhwa
+    </button>
+
+    <button
+      onclick="filtrarCategoria('Manhua',this)"
+    >
+      Manhua
+    </button>
+
+    <button
+      onclick="filtrarCategoria('Mangá',this)"
+    >
+      Mangá
+    </button>
+
+    <button
+      onclick="filtrarCategoria('Novel',this)"
+    >
+      Novel
+    </button>
+
+  </div>
+
 </header>
 
-<main>
 
-<div class="studio-tabs">
+<main class="home">
 
-<button class="active" onclick="abrirAba('obras',this)">
-📚 Obras
-</button>
+  <section class="section">
 
-<button onclick="abrirAba('rascunhos',this)">
-📝 Rascunhos
-</button>
+    <div class="section-title">
+      <h2>📚 Obras</h2>
+    </div>
 
-<button onclick="abrirAba('publicar',this)">
-📤 Publicar
-</button>
+    <div
+      class="obras-grid"
+      id="obrasCatalogo"
+    ></div>
 
-</div>
+  </section>
 
-<section class="section active" id="obrasSection">
 
-<button class="add" onclick="abrirFormulario()">
-＋ Adicionar Nova Obra
-</button>
+  <section class="section">
 
-<div class="obras" id="obras"></div>
+    <div class="section-title">
+      <h2>⭐ Em destaque</h2>
+    </div>
 
-</section>
+    <div
+      class="obras-grid"
+      id="obrasDestaque"
+    ></div>
 
-<section class="section" id="rascunhosSection">
-<div id="rascunhos"></div>
-</section>
+  </section>
 
-<section class="section" id="publicarSection">
 
-<div class="publish-card">
+  <section class="section">
 
-<h2>Nova publicação</h2>
+    <div class="section-title">
+      <h2>🌶️ Minhu</h2>
+    </div>
 
-<p style="color:#777;font-size:13px">
-Publique uma imagem ou vídeo no seu perfil.
-</p>
+    <div class="minhu-box">
 
-<div class="media-preview" id="mediaPreview">
-Escolha uma imagem ou vídeo
-</div>
+      <h3>Publicações</h3>
 
-<div class="media-buttons">
+      <p>
+        Veja fotos e vídeos publicados no seu perfil.
+      </p>
 
-<button type="button" onclick="document.getElementById('imagemPost').click()">
-🖼️ Imagem
-</button>
+      <button onclick="location.href='feed.html'">
+        Abrir Minhu →
+      </button>
 
-<button type="button" onclick="document.getElementById('videoPost').click()">
-🎥 Vídeo
-</button>
+    </div>
 
-</div>
-
-<input
-type="file"
-id="imagemPost"
-accept="image/*"
-style="display:none"
-onchange="selecionarImagem(event)"
->
-
-<input
-type="file"
-id="videoPost"
-accept="video/*,.mp4,.webm,.mov,.m4v"
-style="display:none"
-onchange="selecionarVideo(event)"
->
-
-<label>Legenda</label>
-
-<textarea
-id="legendaPost"
-placeholder="Escreva uma legenda para sua publicação..."
-></textarea>
-
-<div class="publish-actions">
-
-<button class="draft-btn" onclick="salvarRascunho()">
-📝 Salvar rascunho
-</button>
-
-<button class="publish-btn" onclick="publicarPost()">
-📤 Publicar
-</button>
-
-</div>
-
-</div>
-
-</section>
+  </section>
 
 </main>
 
-<div class="modal" id="modal">
-
-<div class="box">
-
-<h2>Nova obra</h2>
-
-<label>Tipo</label>
-
-<select id="tipo">
-<option>Manhwa</option>
-<option>Manhua</option>
-<option>Mangá</option>
-<option>Novel</option>
-</select>
-
-<label>Título</label>
-
-<input
-id="titulo"
-placeholder="Nome da obra"
->
-
-<label>Introdução</label>
-
-<textarea
-id="introducao"
-placeholder="Uma breve introdução"
-></textarea>
-
-<label>Descrição</label>
-
-<textarea
-id="descricao"
-placeholder="Descrição da história"
-></textarea>
-
-<label>Gêneros</label>
-
-<input
-id="generos"
-placeholder="Romance, BL, Drama..."
->
-
-<label>Classificação</label>
-
-<select id="idade">
-<option>Livre</option>
-<option>10 anos</option>
-<option>12 anos</option>
-<option>14 anos</option>
-<option>16 anos</option>
-<option>18 anos</option>
-</select>
-
-<label>Capa</label>
-
-<input
-type="file"
-id="capa"
-accept="image/*"
-onchange="mostrarCapa(event)"
->
-
-<div class="preview" id="preview">
-Capa
-</div>
-
-<div class="actions">
-
-<button class="cancel" onclick="fecharFormulario()">
-Cancelar
-</button>
-
-<button class="save" onclick="salvarObra()">
-Salvar obra
-</button>
-
-</div>
-
-</div>
-</div>
 
 <nav class="bottom">
 
-<button onclick="location.href='index.html'">
-⌂
-<small>Início</small>
-</button>
+  <button class="active">
+    ⌂
+    <small>Início</small>
+  </button>
 
-<button onclick="location.href='feed.html'">
-♧
-<small>Feed</small>
-</button>
+  <button onclick="location.href='feed.html'">
+    🌶️
+    <small>Minhu</small>
+  </button>
 
-<button onclick="location.href='descobrir.html'">
-◈
-<small>Descobrir</small>
-</button>
+  <button onclick="location.href='descobrir.html'">
+    ◈
+    <small>Descobrir</small>
+  </button>
 
-<button class="active">
-▣
-<small>Meu Estúdio</small>
-</button>
+  <button onclick="location.href='estudio.html'">
+    ▣
+    <small>Meu Estúdio</small>
+  </button>
 
-<button onclick="location.href='perfil.html'">
-♙
-<small>Perfil</small>
-</button>
+  <button onclick="location.href='perfil.html'">
+    ♙
+    <small>Perfil</small>
+  </button>
 
 </nav>
 
+
 <script>
 
-let capaAtual="";
-let mediaPostAtual="";
-let tipoMediaPost="";
+let categoriaAtual="Todos";
 
-/* ABAS */
 
-function abrirAba(aba,button){
+function carregarObras(){
 
-document.querySelectorAll(".studio-tabs button")
-.forEach(function(btn){
-btn.classList.remove("active");
-});
+  const obras=
+    JSON.parse(
+      localStorage.getItem("minhas_obras") || "[]"
+    );
 
-button.classList.add("active");
-
-document.querySelectorAll(".section")
-.forEach(function(section){
-section.classList.remove("active");
-});
-
-if(aba==="obras"){
-
-document.getElementById("obrasSection")
-.classList.add("active");
-
-mostrarObras();
+  mostrarObras(obras);
 
 }
 
-if(aba==="rascunhos"){
 
-document.getElementById("rascunhosSection")
-.classList.add("active");
+function mostrarObras(obras){
 
-mostrarRascunhos();
+  const catalogo=
+    document.getElementById("obrasCatalogo");
 
-}
+  const destaque=
+    document.getElementById("obrasDestaque");
 
-if(aba==="publicar"){
 
-document.getElementById("publicarSection")
-.classList.add("active");
+  if(obras.length===0){
 
-}
+    catalogo.innerHTML=`
+      <div class="empty-obras"
+           style="grid-column:1/-1">
 
-}
+        📚
 
-/* OBRAS */
+        <br><br>
 
-function abrirFormulario(){
+        Você ainda não criou nenhuma obra.
 
-document.getElementById("modal").style.display="block";
+        <br>
 
-}
+        Crie uma obra no Meu Estúdio
+        para ela aparecer aqui.
 
-function fecharFormulario(){
+      </div>
+    `;
 
-document.getElementById("modal").style.display="none";
+    destaque.innerHTML="";
 
-}
+    return;
 
-function mostrarCapa(event){
+  }
 
-const arquivo=event.target.files[0];
 
-if(!arquivo)return;
+  catalogo.innerHTML="";
 
-const leitor=new FileReader();
 
-leitor.onload=function(e){
+  obras.forEach(function(obra){
 
-capaAtual=e.target.result;
+    catalogo.appendChild(criarCard(obra));
 
-document.getElementById("preview").innerHTML=
-'<img src="'+capaAtual+'">';
+  });
 
-};
 
-leitor.readAsDataURL(arquivo);
+  destaque.innerHTML="";
 
-}
 
-function salvarObra(){
+  obras.slice(0,3).forEach(function(obra){
 
-const titulo=
-document.getElementById("titulo").value.trim();
+    destaque.appendChild(criarCard(obra));
 
-if(!titulo){
-
-alert("Digite o título da obra.");
-
-return;
+  });
 
 }
 
-const obra={
 
-id:Date.now(),
+function criarCard(obra){
 
-tipo:document.getElementById("tipo").value,
+  const card=
+    document.createElement("div");
 
-titulo:titulo,
+  card.className="obra-card";
 
-introducao:
-document.getElementById("introducao").value,
 
-descricao:
-document.getElementById("descricao").value,
+  const capa=
+    obra.capa
+    ?
+    `<img
+      class="obra-capa"
+      src="${obra.capa}"
+      alt="${escapeHTML(obra.titulo)}"
+    >`
+    :
+    `<div class="obra-capa">
+      📖
+    </div>`;
 
-generos:
-document.getElementById("generos").value,
 
-idade:
-document.getElementById("idade").value,
+  card.innerHTML=`
 
-capa:capaAtual,
+    ${capa}
 
-data:Date.now()
+    <div class="obra-info">
 
-};
+      <small>
+        ${escapeHTML(obra.tipo || "")}
+      </small>
 
-const obras=
-JSON.parse(
-localStorage.getItem("minhas_obras")||"[]"
-);
+      <h3>
+        ${escapeHTML(obra.titulo)}
+      </h3>
 
-obras.push(obra);
+      <small>
+        ${escapeHTML(obra.generos || "")}
+      </small>
 
-localStorage.setItem(
-"minhas_obras",
-JSON.stringify(obras)
-);
+    </div>
 
-fecharFormulario();
+  `;
 
-limparFormulario();
 
-mostrarObras();
+  card.onclick=function(){
 
-alert("Obra salva com sucesso!");
+    localStorage.setItem(
+      "obraSelecionada",
+      JSON.stringify(obra)
+    );
 
-}
+    alert(
+      "Obra selecionada: " +
+      obra.titulo
+    );
 
-function mostrarObras(){
+  };
 
-const obras=
-JSON.parse(
-localStorage.getItem("minhas_obras")||"[]"
-);
 
-const container=
-document.getElementById("obras");
-
-if(obras.length===0){
-
-container.innerHTML=
-'<div class="empty">Você ainda não criou nenhuma obra.</div>';
-
-return;
+  return card;
 
 }
 
-container.innerHTML="";
 
-obras.forEach(obra=>{
+function filtrarCategoria(categoria,button){
 
-const div=document.createElement("div");
+  categoriaAtual=categoria;
 
-div.className="obra";
 
-div.innerHTML=`
+  document
+    .querySelectorAll(".categories button")
+    .forEach(function(btn){
 
-${
-obra.capa
-?
-'<img src="'+obra.capa+'">'
-:
-'<div style="width:90px;height:125px;border-radius:12px;background:#eee;display:flex;align-items:center;justify-content:center">♡</div>'
-}
+      btn.classList.remove("active");
 
-<div class="obra-info">
+    });
 
-<small>${escapeHTML(obra.tipo)}</small>
 
-<h3>${escapeHTML(obra.titulo)}</h3>
+  button.classList.add("active");
 
-<p>
-${escapeHTML(
-obra.introducao||
-obra.descricao||
-"Sem descrição."
-)}
-</p>
-
-<small>
-${escapeHTML(obra.generos||"")}
-</small>
-
-</div>
-`;
-
-container.appendChild(div);
-
-});
+  filtrarObras();
 
 }
 
-function limparFormulario(){
 
-document.getElementById("titulo").value="";
-document.getElementById("introducao").value="";
-document.getElementById("descricao").value="";
-document.getElementById("generos").value="";
-document.getElementById("capa").value="";
-document.getElementById("preview").innerHTML="Capa";
+function filtrarObras(){
 
-capaAtual="";
+  const texto=
+    document
+      .getElementById("pesquisa")
+      .value
+      .toLowerCase()
+      .trim();
 
-}
 
-/* PUBLICAÇÃO */
+  const obras=
+    JSON.parse(
+      localStorage.getItem("minhas_obras") || "[]"
+    );
 
-function selecionarImagem(event){
 
-const arquivo=event.target.files[0];
+  const filtradas=
+    obras.filter(function(obra){
 
-if(!arquivo)return;
+      const combinaCategoria=
+        categoriaAtual==="Todos" ||
+        obra.tipo===categoriaAtual;
 
-tipoMediaPost="image";
 
-const leitor=new FileReader();
+      const combinaPesquisa=
+        !texto ||
+        String(obra.titulo || "")
+          .toLowerCase()
+          .includes(texto) ||
 
-leitor.onload=function(e){
+        String(obra.generos || "")
+          .toLowerCase()
+          .includes(texto) ||
 
-mediaPostAtual=e.target.result;
+        String(obra.introducao || "")
+          .toLowerCase()
+          .includes(texto);
 
-document.getElementById("mediaPreview").innerHTML=
-'<img src="'+mediaPostAtual+'">';
 
-};
+      return combinaCategoria &&
+             combinaPesquisa;
 
-leitor.readAsDataURL(arquivo);
+    });
 
-}
 
-function selecionarVideo(event){
-
-const arquivo=event.target.files[0];
-
-if(!arquivo)return;
-
-tipoMediaPost="video";
-
-const leitor=new FileReader();
-
-leitor.onload=function(e){
-
-mediaPostAtual=e.target.result;
-
-document.getElementById("mediaPreview").innerHTML=
-'<video src="'+mediaPostAtual+'" controls playsinline></video>';
-
-};
-
-leitor.readAsDataURL(arquivo);
+  mostrarObras(filtradas);
 
 }
 
-/* RASCUNHO */
-
-function salvarRascunho(){
-
-const legenda=
-document.getElementById("legendaPost").value.trim();
-
-if(!mediaPostAtual && !legenda){
-
-alert("Adicione uma mídia ou escreva uma legenda.");
-
-return;
-
-}
-
-const rascunho={
-
-id:Date.now(),
-
-type:tipoMediaPost,
-
-media:mediaPostAtual,
-
-caption:legenda,
-
-data:Date.now()
-
-};
-
-const rascunhos=
-JSON.parse(
-localStorage.getItem("meus_rascunhos")||"[]"
-);
-
-rascunhos.unshift(rascunho);
-
-localStorage.setItem(
-"meus_rascunhos",
-JSON.stringify(rascunhos)
-);
-
-alert("Rascunho salvo!");
-
-limparPublicacao();
-
-mostrarRascunhos();
-
-abrirAba(
-"rascunhos",
-document.querySelectorAll(".studio-tabs button")[1]
-);
-
-}
-
-function mostrarRascunhos(){
-
-const container=
-document.getElementById("rascunhos");
-
-const rascunhos=
-JSON.parse(
-localStorage.getItem("meus_rascunhos")||"[]"
-);
-
-if(rascunhos.length===0){
-
-container.innerHTML=`
-
-<div class="empty">
-
-<div style="font-size:38px">📝</div>
-
-<strong>Nenhum rascunho</strong>
-
-<p>
-Se você salvar uma publicação antes de publicar,
-ela aparecerá aqui.
-</p>
-
-</div>
-
-`;
-
-return;
-
-}
-
-container.innerHTML="";
-
-rascunhos.forEach(function(rascunho,index){
-
-const div=document.createElement("div");
-
-div.className="draft";
-
-div.innerHTML=`
-
-<div class="draft-title">
-📝 Rascunho ${index+1}
-</div>
-
-<div class="draft-info">
-
-${rascunho.type==="video"?"🎥 Vídeo":"🖼️ Imagem"}
-
-${
-rascunho.caption
-?
-" · "+escapeHTML(
-rascunho.caption.substring(0,80)
-)
-:
-""
-}
-
-</div>
-
-<div class="draft-buttons">
-
-<button onclick="editarRascunho(${index})">
-Editar
-</button>
-
-<button onclick="excluirRascunho(${index})">
-Excluir
-</button>
-
-</div>
-
-`;
-
-container.appendChild(div);
-
-});
-
-}
-
-function editarRascunho(index){
-
-const rascunhos=
-JSON.parse(
-localStorage.getItem("meus_rascunhos")||"[]"
-);
-
-const rascunho=rascunhos[index];
-
-if(!rascunho)return;
-
-mediaPostAtual=rascunho.media||"";
-
-tipoMediaPost=rascunho.type||"";
-
-document.getElementById("legendaPost").value=
-rascunho.caption||"";
-
-if(rascunho.media){
-
-if(rascunho.type==="video"){
-
-document.getElementById("mediaPreview").innerHTML=
-'<video src="'+rascunho.media+'" controls playsinline></video>';
-
-}else{
-
-document.getElementById("mediaPreview").innerHTML=
-'<img src="'+rascunho.media+'">';
-
-}
-
-}
-
-rascunhos.splice(index,1);
-
-localStorage.setItem(
-"meus_rascunhos",
-JSON.stringify(rascunhos)
-);
-
-abrirAba(
-"publicar",
-document.querySelectorAll(".studio-tabs button")[2]
-);
-
-}
-
-function excluirRascunho(index){
-
-if(!confirm("Excluir este rascunho?"))return;
-
-const rascunhos=
-JSON.parse(
-localStorage.getItem("meus_rascunhos")||"[]"
-);
-
-rascunhos.splice(index,1);
-
-localStorage.setItem(
-"meus_rascunhos",
-JSON.stringify(rascunhos)
-);
-
-mostrarRascunhos();
-
-}
-
-/* PUBLICAR */
-
-function publicarPost(){
-
-if(!mediaPostAtual){
-
-alert("Escolha uma imagem ou vídeo.");
-
-return;
-
-}
-
-const post={
-
-id:Date.now(),
-
-type:tipoMediaPost,
-
-media:mediaPostAtual,
-
-caption:
-document.getElementById("legendaPost").value.trim(),
-
-likes:0,
-
-liked:false,
-
-hideLikes:false,
-
-data:Date.now(),
-
-author:
-localStorage.getItem("profileName")||"Meu Perfil"
-
-};
-
-const posts=
-JSON.parse(
-localStorage.getItem("minhas_publicacoes")||"[]"
-);
-
-posts.unshift(post);
-
-localStorage.setItem(
-"minhas_publicacoes",
-JSON.stringify(posts)
-);
-
-alert("Publicação feita com sucesso!");
-
-limparPublicacao();
-
-}
-
-/* LIMPAR */
-
-function limparPublicacao(){
-
-mediaPostAtual="";
-tipoMediaPost="";
-
-document.getElementById("imagemPost").value="";
-document.getElementById("videoPost").value="";
-document.getElementById("legendaPost").value="";
-
-document.getElementById("mediaPreview").innerHTML=
-"Escolha uma imagem ou vídeo";
-
-}
-
-/* SEGURANÇA */
 
 function escapeHTML(text){
 
-return String(text).replace(
-/[&<>"']/g,
-function(m){
+  return String(text).replace(
+    /[&<>"']/g,
+    function(m){
 
-return {
+      return {
 
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
 
-}[m];
+      }[m];
 
-});
+    }
+  );
 
 }
 
-/* INICIAR */
 
-mostrarObras();
-mostrarRascunhos();
+carregarObras();
 
 </script>
 
