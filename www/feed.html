@@ -1,0 +1,401 @@
+<!doctype html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Feed - Meu Manhwa</title><style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#fff;
+color:#171717;
+padding-bottom:85px
+}
+header{
+height:64px;
+display:flex;
+align-items:center;
+gap:15px;
+padding:0 18px;
+border-bottom:1px solid #eee;
+position:sticky;
+top:0;
+background:#fff;
+z-index:5
+}
+.back{
+border:0;
+background:none;
+font-size:28px
+}
+header h1{font-size:20px;margin:0}
+main{max-width:700px;margin:auto;padding:18px}
+
+.new-post{
+width:100%;
+padding:16px;
+border:1px solid #ddd;
+border-radius:16px;
+background:#fff;
+font-size:15px;
+text-align:left
+}
+.new-post button{
+margin-top:12px;
+padding:12px 18px;
+border:0;
+border-radius:12px;
+background:#171717;
+color:#fff;
+font-weight:bold
+}
+
+.post{
+border:1px solid #e5e5e5;
+border-radius:18px;
+margin-top:18px;
+overflow:hidden;
+background:#fff
+}
+.post-head{
+padding:14px;
+display:flex;
+align-items:center;
+gap:10px
+}
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+background:#eee;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px
+}
+.post-text{
+padding:0 15px 15px;
+line-height:1.5
+}
+.post img{
+width:100%;
+max-height:600px;
+object-fit:contain;
+background:#f5f5f5
+}
+.post-actions{
+padding:12px 15px;
+border-top:1px solid #eee;
+display:flex;
+gap:25px
+}
+.post-actions button{
+border:0;
+background:none;
+font-size:15px
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+z-index:20;
+overflow:auto
+}
+.box{
+background:white;
+width:92%;
+max-width:600px;
+margin:30px auto;
+padding:22px;
+border-radius:22px
+}
+.box h2{margin-top:0}
+textarea,input{
+width:100%;
+padding:13px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px
+}
+textarea{min-height:110px}
+label{
+display:block;
+font-weight:bold;
+margin:15px 0 7px
+}
+.preview{
+margin-top:10px;
+max-height:250px;
+overflow:hidden;
+border-radius:14px
+}
+.preview img{
+width:100%;
+max-height:250px;
+object-fit:contain
+}
+.actions{
+display:flex;
+gap:10px;
+margin-top:18px
+}
+.actions button{
+flex:1;
+padding:14px;
+border:0;
+border-radius:13px;
+font-weight:bold
+}
+.cancel{background:#eee}
+.publish{background:#171717;color:#fff}
+
+.empty{
+text-align:center;
+padding:50px 15px;
+color:#888
+}
+
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:72px;
+background:#fff;
+border-top:1px solid #ddd;
+display:flex;
+justify-content:space-around;
+align-items:center;
+z-index:10
+}
+.bottom button{
+border:0;
+background:none;
+color:#777;
+font-size:21px
+}
+.bottom small{
+display:block;
+font-size:10px;
+margin-top:3px
+}
+.bottom .active{
+color:#111;
+font-weight:bold
+}
+</style></head><body><header>
+<button class="back" onclick="history.back()">←</button>
+<h1>Feed</h1>
+</header><main><div class="new-post">
+O que você quer publicar?
+<br>
+<button onclick="abrirPublicacao()">＋ Nova publicação</button>
+</div><div id="feed"></div></main><div class="modal" id="modal"><div class="box"><h2>Nova publicação</h2><label>Texto</label>
+
+<textarea id="texto" placeholder="Escreva alguma coisa..."></textarea><label>Imagem</label>
+<input type="file" id="imagem" accept="image/*" onchange="mostrarImagem(event)">
+
+<div class="preview" id="preview"></div><div class="actions">
+<button class="cancel" onclick="fecharPublicacao()">Cancelar</button>
+<button class="publish" onclick="publicar()">Publicar</button>
+</div></div>
+</div><nav class="bottom"><button onclick="location.href='index.html'">
+⌂
+<small>Início</small>
+</button><button class="active">
+♧
+<small>Feed</small>
+</button><button onclick="location.href='descobrir.html'">
+◈
+<small>Descobrir</small>
+</button><button onclick="location.href='estudio.html'">
+▣
+<small>Meu Estúdio</small>
+</button><button onclick="location.href='perfil.html'">
+♙
+<small>Perfil</small>
+</button></nav><script>
+
+let imagemAtual="";
+
+function abrirPublicacao(){
+document.getElementById("modal").style.display="block";
+}
+
+function fecharPublicacao(){
+document.getElementById("modal").style.display="none";
+}
+
+function mostrarImagem(event){
+
+const arquivo=event.target.files[0];
+
+if(!arquivo)return;
+
+const leitor=new FileReader();
+
+leitor.onload=function(e){
+
+imagemAtual=e.target.result;
+
+document.getElementById("preview").innerHTML=
+'<img src="'+imagemAtual+'">';
+
+};
+
+leitor.readAsDataURL(arquivo);
+}
+
+function publicar(){
+
+const texto=document.getElementById("texto").value.trim();
+
+if(!texto && !imagemAtual){
+alert("Escreva algo ou escolha uma imagem.");
+return;
+}
+
+const publicacao={
+
+id:Date.now(),
+texto:texto,
+imagem:imagemAtual,
+data:Date.now(),
+curtidas:0
+
+};
+
+const publicacoes=
+JSON.parse(localStorage.getItem("minhas_publicacoes")||"[]");
+
+publicacoes.unshift(publicacao);
+
+localStorage.setItem(
+"minhas_publicacoes",
+JSON.stringify(publicacoes)
+);
+
+fecharPublicacao();
+
+document.getElementById("texto").value="";
+document.getElementById("imagem").value="";
+document.getElementById("preview").innerHTML="";
+
+imagemAtual="";
+
+mostrarFeed();
+
+alert("Publicação salva!");
+
+}
+
+function mostrarFeed(){
+
+const publicacoes=
+JSON.parse(localStorage.getItem("minhas_publicacoes")||"[]");
+
+const feed=document.getElementById("feed");
+
+if(publicacoes.length===0){
+
+feed.innerHTML=
+'<div class="empty">Ainda não há publicações.</div>';
+
+return;
+}
+
+feed.innerHTML="";
+
+publicacoes.forEach(post=>{
+
+const div=document.createElement("article");
+
+div.className="post";
+
+div.innerHTML=`
+
+<div class="post-head">
+<div class="avatar">♙</div>
+<div>
+<b>Meu perfil</b><br>
+<small>Publicação</small>
+</div>
+</div>
+
+${post.texto
+? '<div class="post-text">'+escapeHTML(post.texto)+'</div>'
+: ''}
+
+${post.imagem
+? '<img src="'+post.imagem+'">'
+: ''}
+
+<div class="post-actions">
+
+<button onclick="curtir(${post.id})">
+♡ Curtir
+</button>
+
+<button>
+💬 Comentar
+</button>
+
+<button>
+↗ Compartilhar
+</button>
+
+</div>
+`;
+
+feed.appendChild(div);
+
+});
+
+}
+
+function curtir(id){
+
+const publicacoes=
+JSON.parse(localStorage.getItem("minhas_publicacoes")||"[]");
+
+const post=publicacoes.find(p=>p.id===id);
+
+if(post){
+
+post.curtidas++;
+
+localStorage.setItem(
+"minhas_publicacoes",
+JSON.stringify(publicacoes)
+);
+
+mostrarFeed();
+
+}
+
+}
+
+function escapeHTML(text){
+
+return String(text).replace(/[&<>"']/g,function(m){
+
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m];
+
+});
+
+}
+
+mostrarFeed();
+
+</script></body>
+  </html>
