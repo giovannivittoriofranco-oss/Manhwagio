@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perfil - Meu Manhwa</title><style>
+<title>Perfil - Meu Manhwa</title>
+
+<style>
 *{box-sizing:border-box}
 
 body{
@@ -43,9 +46,7 @@ margin:auto;
 padding:25px 18px;
 }
 
-.profile-head{
-text-align:center;
-}
+.profile-head{text-align:center}
 
 .avatar{
 width:92px;
@@ -88,9 +89,7 @@ gap:35px;
 margin:30px 0;
 }
 
-.stat{
-text-align:center;
-}
+.stat{text-align:center}
 
 .stat strong{
 display:block;
@@ -189,7 +188,7 @@ border:1px dashed #ccc;
 border-radius:18px;
 }
 
-/* PUBLICAÇÕES MINHU */
+/* PUBLICAÇÕES */
 
 .posts{
 display:flex;
@@ -202,7 +201,8 @@ border:1px solid #e8e8e8;
 border-radius:18px;
 overflow:hidden;
 background:#fff;
-box-shadow:0 2px 10px rgba(0,0,0,.04);
+box-shadow:0 2px 10px rgba(0,0,0,.05);
+user-select:none;
 }
 
 .post-media{
@@ -267,10 +267,6 @@ font-size:12px;
 color:#777;
 }
 
-.repost{
-font-size:20px;
-}
-
 .more{
 margin-left:auto;
 font-size:23px;
@@ -296,6 +292,52 @@ font-size:14px;
 .post-menu button:hover{
 background:#eee;
 border-radius:8px;
+}
+
+/* COMENTÁRIOS */
+
+.comments{
+border-top:1px solid #eee;
+padding:12px 15px;
+}
+
+.comment{
+padding:9px 0;
+border-bottom:1px solid #eee;
+font-size:13px;
+}
+
+.comment strong{
+margin-right:5px;
+}
+
+.comment-delete{
+float:right;
+border:0;
+background:none;
+color:#d00;
+font-size:12px;
+}
+
+.comment-box{
+display:flex;
+gap:7px;
+margin-top:10px;
+}
+
+.comment-box input{
+flex:1;
+padding:10px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.comment-box button{
+border:0;
+background:#171717;
+color:#fff;
+border-radius:10px;
+padding:0 13px;
 }
 
 /* MODAL */
@@ -466,71 +508,279 @@ margin-top:4px;
 color:#111;
 font-weight:bold;
 }
-</style></head><body><header class="top">
+
+/* TEMA ESCURO */
+
+body.dark{
+background:#111;
+color:#fff;
+}
+
+body.dark .top,
+body.dark .bottom{
+background:#111;
+color:#fff;
+border-color:#333;
+}
+
+body.dark .top button,
+body.dark .bottom button{
+color:#fff;
+}
+
+body.dark .group,
+body.dark .post,
+body.dark .page-card,
+body.dark .modal-box{
+background:#1b1b1b;
+color:#fff;
+border-color:#333;
+}
+
+body.dark .profile-actions button,
+body.dark .social button,
+body.dark .setting button{
+background:#1b1b1b;
+color:#fff;
+border-color:#444;
+}
+
+body.dark .post-menu,
+body.dark .comments{
+background:#181818;
+border-color:#333;
+}
+
+body.dark input,
+body.dark textarea{
+background:#222;
+color:#fff;
+border-color:#444;
+}
+</style>
+</head>
+
+<body>
+
+<header class="top">
 <button onclick="goBack()">←</button>
 <h1 id="topTitle">Perfil</h1>
 <button onclick="openSettings()">⚙️</button>
-</header><main class="profile"><section id="profilePage"><div class="profile-head"><div class="avatar" id="avatar">♙</div><h2 class="name" id="profileName">Meu Perfil</h2><p class="bio" id="profileBio">
+</header>
+
+<main class="profile">
+
+<section id="profilePage">
+
+<div class="profile-head">
+
+<div class="avatar" id="avatar">♙</div>
+
+<h2 class="name" id="profileName">Meu Perfil</h2>
+
+<p class="bio" id="profileBio">
 Adicione uma biografia ao seu perfil.
-</p></div><div class="stats"><div class="stat">
-<strong id="followers">0</strong>
-<span>Seguidores</span>
-</div><div class="stat">
-<strong id="likes">0</strong>
-<span>Curtidas</span>
-</div><div class="stat">
-<strong>0</strong>
-<span>Grupo Mega</span>
-</div></div><div class="profile-actions">
-<button class="edit" onclick="openEdit()">Editar perfil</button>
-</div><section class="group"><h2>👥 Grupo Mega</h2><p>Conecte suas redes sociais ao seu perfil.</p><div class="social"><button onclick="connect('Instagram')">Instagram</button>
-<button onclick="connect('WhatsApp')">WhatsApp</button>
-<button onclick="connect('Telegram')">Telegram</button>
+</p>
 
 </div>
-</section><div class="tabs"><button class="active" onclick="showTab('Minhu',this)">Minhu</button>
-<button onclick="showTab('Manhwa',this)">Manhwa</button>
-<button onclick="showTab('Manhua',this)">Manhua</button>
-<button onclick="showTab('Mangá',this)">Mangá</button>
-<button onclick="showTab('Novel',this)">Novel</button>
 
-</div><div class="content"><div id="tabContent"></div></div></section><!-- CONFIGURAÇÕES --><section class="settings-list" id="settingsPage"><div class="setting"><div class="setting-left">
+<div class="stats">
+
+<div class="stat">
+<strong id="followers">0</strong>
+<span>Seguidores</span>
+</div>
+
+<div class="stat">
+<strong id="likes">0</strong>
+<span>Curtidas</span>
+</div>
+
+<div class="stat">
+<strong id="megaCount">0</strong>
+<span>Grupo Mega</span>
+</div>
+
+</div>
+
+<div class="profile-actions">
+<button class="edit" onclick="openEdit()">Editar perfil</button>
+</div>
+
+<section class="group">
+
+<h2>👥 Grupo Mega</h2>
+
+<p>
+Conecte suas redes sociais ao seu perfil.
+</p>
+
+<div class="social">
+
+<button onclick="connect('Instagram')">
+Instagram
+</button>
+
+<button onclick="connect('WhatsApp')">
+WhatsApp
+</button>
+
+<button onclick="connect('Telegram')">
+Telegram
+</button>
+
+</div>
+
+</section>
+
+<div class="tabs">
+
+<button class="active" onclick="showTab('Minhu',this)">
+Minhu
+</button>
+
+<button onclick="showTab('Manhwa',this)">
+Manhwa
+</button>
+
+<button onclick="showTab('Manhua',this)">
+Manhua
+</button>
+
+<button onclick="showTab('Mangá',this)">
+Mangá
+</button>
+
+<button onclick="showTab('Novel',this)">
+Novel
+</button>
+
+<button onclick="showTab('Republicados',this)">
+🔁 Republicados
+</button>
+
+</div>
+
+<div class="content">
+<div id="tabContent"></div>
+</div>
+
+</section>
+
+
+<!-- CONFIGURAÇÕES -->
+
+<section class="settings-list" id="settingsPage">
+
+<div class="setting">
+
+<div class="setting-left">
 <strong>👤 Conta</strong>
 <span>Gerenciar sua conta</span>
-</div><button onclick="openAccount()">›</button>
+</div>
 
-</div><div class="setting"><div class="setting-left">
+<button onclick="openAccount()">›</button>
+
+</div>
+
+<div class="setting">
+
+<div class="setting-left">
 <strong>📧 E-mail e senha</strong>
 <span>Alterar dados de acesso</span>
-</div><button onclick="openEmail()">›</button>
+</div>
 
-</div><div class="setting"><div class="setting-left">
+<button onclick="openEmail()">›</button>
+
+</div>
+
+<div class="setting">
+
+<div class="setting-left">
 <strong>📱 Número de celular</strong>
 <span>Adicionar ou alterar número</span>
-</div><button onclick="openPhone()">›</button>
+</div>
 
-</div><div class="setting"><div class="setting-left">
+<button onclick="openPhone()">›</button>
+
+</div>
+
+<div class="setting">
+
+<div class="setting-left">
 <strong>🌙 Tema</strong>
 <span id="themeText">Claro</span>
-</div><button onclick="toggleTheme()">Alterar</button>
+</div>
 
-</div><div class="setting"><div class="setting-left">
+<button onclick="toggleTheme()">Alterar</button>
+
+</div>
+
+<div class="setting">
+
+<div class="setting-left">
 <strong>🚪 Sair da conta</strong>
 <span>Encerrar sua sessão</span>
-</div><button onclick="logout()">Sair</button>
+</div>
 
-</div><div class="setting"><div class="setting-left">
+<button onclick="logout()">Sair</button>
+
+</div>
+
+<div class="setting">
+
+<div class="setting-left">
 <strong class="danger">🗑️ Excluir conta</strong>
 <span>Excluir permanentemente</span>
-</div><button onclick="deleteAccount()">Excluir</button>
+</div>
 
-</div></section><!-- CONTA --><section class="internal-page" id="accountPage"><button class="page-back" onclick="backToSettings()">←</button>
+<button onclick="deleteAccount()">Excluir</button>
 
-<h2>Conta</h2><p>Gerencie as informações da sua conta.</p><div class="page-card"><strong>Nome do perfil</strong>
+</div>
 
-<p id="accountName">Meu Perfil</p></div></section><!-- EMAIL --><section class="internal-page" id="emailPage"><button class="page-back" onclick="backToSettings()">←</button>
+</section>
 
-<h2>E-mail e senha</h2><p>Altere seus dados de acesso.</p><div class="page-card"><label>E-mail</label>
+
+<!-- CONTA -->
+
+<section class="internal-page" id="accountPage">
+
+<button class="page-back" onclick="backToSettings()">←</button>
+
+<h2>Conta</h2>
+
+<p>
+Gerencie as informações da sua conta.
+</p>
+
+<div class="page-card">
+
+<strong>Nome do perfil</strong>
+
+<p id="accountName">
+Meu Perfil
+</p>
+
+</div>
+
+</section>
+
+
+<!-- EMAIL -->
+
+<section class="internal-page" id="emailPage">
+
+<button class="page-back" onclick="backToSettings()">←</button>
+
+<h2>E-mail e senha</h2>
+
+<p>
+Altere seus dados de acesso.
+</p>
+
+<div class="page-card">
+
+<label>E-mail</label>
 
 <input
 id="emailInput"
@@ -546,9 +796,28 @@ placeholder="Digite uma nova senha">
 
 <button class="save" onclick="saveAccess()">
 Salvar alterações
-</button></div></section><!-- CELULAR --><section class="internal-page" id="phonePage"><button class="page-back" onclick="backToSettings()">←</button>
+</button>
 
-<h2>Número de celular</h2><p>Adicione ou altere o número associado à sua conta.</p><div class="page-card"><label>Número de celular</label>
+</div>
+
+</section>
+
+
+<!-- CELULAR -->
+
+<section class="internal-page" id="phonePage">
+
+<button class="page-back" onclick="backToSettings()">←</button>
+
+<h2>Número de celular</h2>
+
+<p>
+Adicione ou altere o número associado à sua conta.
+</p>
+
+<div class="page-card">
+
+<label>Número de celular</label>
 
 <input
 id="phoneInput"
@@ -557,9 +826,30 @@ placeholder="(00) 00000-0000">
 
 <button class="save" onclick="savePhone()">
 Salvar número
-</button></div></section></main><!-- EDITAR PERFIL --><div class="modal" id="editModal"><div class="modal-box"><div class="modal-head"><h2>Editar perfil</h2><button class="close" onclick="closeEdit()">×</button>
+</button>
 
-</div><label>Foto de perfil</label>
+</div>
+
+</section>
+
+</main>
+
+
+<!-- EDITAR PERFIL -->
+
+<div class="modal" id="editModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>Editar perfil</h2>
+
+<button class="close" onclick="closeEdit()">×</button>
+
+</div>
+
+<label>Foto de perfil</label>
 
 <input
 type="file"
@@ -578,24 +868,50 @@ placeholder="Nome do perfil">
 
 <textarea
 id="editBio"
-placeholder="Escreva sua biografia..."></textarea><button class="save" onclick="saveProfile()">
+placeholder="Escreva sua biografia..."></textarea>
+
+<button class="save" onclick="saveProfile()">
 Salvar alterações
-</button></div></div><nav class="bottom"><button onclick="go('index.html')">
+</button>
+
+</div>
+
+</div>
+
+
+<!-- BARRA -->
+
+<nav class="bottom">
+
+<button onclick="go('index.html')">
 ⌂
 <small>Início</small>
-</button><button onclick="go('feed.html')">
+</button>
+
+<button onclick="go('feed.html')">
 ♡
 <small>Feed</small>
-</button><button onclick="go('descobrir.html')">
+</button>
+
+<button onclick="go('descobrir.html')">
 ◈
 <small>Descobrir</small>
-</button><button onclick="go('estudio.html')">
+</button>
+
+<button onclick="go('estudio.html')">
 ▣
 <small>Meu Estúdio</small>
-</button><button class="active">
+</button>
+
+<button class="active">
 ♙
 <small>Perfil</small>
-</button></nav><script>
+</button>
+
+</nav>
+
+
+<script>
 
 /* NAVEGAÇÃO */
 
@@ -849,7 +1165,27 @@ return text.replace(
 }
 
 
-/* MINHU */
+/* PUBLICAÇÕES */
+
+function getPosts(){
+
+return JSON.parse(
+localStorage.getItem("minhas_publicacoes")||"[]"
+);
+
+}
+
+function savePosts(posts){
+
+localStorage.setItem(
+"minhas_publicacoes",
+JSON.stringify(posts)
+);
+
+}
+
+
+/* MINHU / REPUBLICADOS */
 
 function showTab(name,button){
 
@@ -860,9 +1196,6 @@ btn.classList.remove("active");
 
 button.classList.add("active");
 
-const content=
-document.getElementById("tabContent");
-
 if(name==="Minhu"){
 
 loadPosts();
@@ -871,7 +1204,15 @@ return;
 
 }
 
-content.innerHTML=`
+if(name==="Republicados"){
+
+loadReposts();
+
+return;
+
+}
+
+document.getElementById("tabContent").innerHTML=`
 
 <div class="empty">
 
@@ -888,17 +1229,18 @@ content.innerHTML=`
 }
 
 
-/* CARREGAR PUBLICAÇÕES */
+/* CARREGAR MINHU */
 
 function loadPosts(){
 
 const content=
 document.getElementById("tabContent");
 
-let posts=
-JSON.parse(
-localStorage.getItem("minhas_publicacoes")||"[]"
-);
+let posts=getPosts();
+
+posts=posts.filter(function(post){
+return !post.reposted;
+});
 
 if(posts.length===0){
 
@@ -910,7 +1252,7 @@ content.innerHTML=`
 
 <strong>Nenhuma publicação ainda</strong>
 
-<p>Suas mídias aparecerão aqui.</p>
+<p>Suas publicações aparecerão aqui.</p>
 
 </div>
 
@@ -922,45 +1264,104 @@ return;
 
 content.innerHTML=
 '<div class="posts">'+
-posts.map(function(post,index){
+posts.map(function(post){
+
+return createPostHTML(post,false);
+
+}).join("")+
+'</div>';
+
+}
+
+
+/* CARREGAR REPUBLICADOS */
+
+function loadReposts(){
+
+const content=
+document.getElementById("tabContent");
+
+const posts=getPosts();
+
+const reposts=posts.filter(function(post){
+return post.reposted===true;
+});
+
+if(reposts.length===0){
+
+content.innerHTML=`
+
+<div class="empty">
+
+<div>🔁</div>
+
+<strong>Nenhuma republicação</strong>
+
+<p>Os posts que você republicar aparecerão aqui.</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+content.innerHTML=
+'<div class="posts">'+
+reposts.map(function(post){
+
+return createPostHTML(post,true);
+
+}).join("")+
+'</div>';
+
+}
+
+
+/* CRIAR POST */
+
+function createPostHTML(post,isRepost){
+
+const likes=
+post.hideLikes
+?
+""
+:
+`<span class="likes-count">${post.likes||0} curtidas</span>`;
 
 const media=
 post.type==="video"
 
 ?
 
-`<video src="${post.media}" controls></video>`
+`<video src="${post.media}" controls playsinline></video>`
 
 :
 
 `<img src="${post.media}" alt="Publicação">`;
 
-const likes=
-post.hideLikes
-?
-
-""
-
-:
-
-`<span class="likes-count">
-${post.likes||0} curtidas
-</span>`;
+const comments=
+post.comments||[];
 
 return `
 
-<article class="post">
+<article
+class="post"
+data-id="${post.id}"
+oncontextmenu="return false;"
+ontouchstart="startHold(event,${post.id})"
+ontouchend="cancelHold()"
+ontouchmove="cancelHold()">
 
 <div class="post-media">
-
 ${media}
-
 </div>
 
 <div class="post-info">
 
 <div class="post-author">
-${localStorage.getItem("profileName")||"Meu Perfil"}
+${post.author||localStorage.getItem("profileName")||"Meu Perfil"}
 </div>
 
 <div class="post-caption">
@@ -971,7 +1372,7 @@ ${formatCaption(post.caption||"")}
 
 <button
 class="post-action ${post.liked?"liked":""}"
-onclick="likePost(${index})">
+onclick="likePost(${post.id})">
 
 ${post.liked?"♥":"♡"}
 
@@ -980,8 +1381,16 @@ ${post.liked?"♥":"♡"}
 ${likes}
 
 <button
-class="post-action repost"
-onclick="repostPost(${index})">
+class="post-action"
+onclick="toggleComments(${post.id})">
+
+💬
+
+</button>
+
+<button
+class="post-action"
+onclick="repostPost(${post.id})">
 
 🔁
 
@@ -989,7 +1398,7 @@ onclick="repostPost(${index})">
 
 <button
 class="post-action more"
-onclick="togglePostMenu(${index})">
+onclick="togglePostMenu(${post.id})">
 
 ⋮
 
@@ -999,19 +1408,72 @@ onclick="togglePostMenu(${index})">
 
 </div>
 
+
 <div
 class="post-menu"
-id="postMenu${index}">
+id="postMenu${post.id}">
 
-<button onclick="toggleHideLikes(${index})">
+<button onclick="toggleHideLikes(${post.id})">
 
 ${post.hideLikes?"👁 Mostrar curtidas":"🙈 Ocultar curtidas"}
 
 </button>
 
-<button onclick="repostPost(${index})">
-🔁 Republicar
+${isRepost
+?
+`<button onclick="removeRepost(${post.id})">
+❌ Remover republicação
+</button>`
+:
+`<button onclick="deletePost(${post.id})">
+🗑️ Apagar publicação
+</button>`
+}
+
+</div>
+
+
+<div
+class="comments"
+id="comments${post.id}"
+style="display:none;">
+
+${comments.map(function(comment,cindex){
+
+return `
+
+<div class="comment">
+
+<strong>${comment.author||"Usuário"}:</strong>
+
+${comment.text}
+
+<button
+class="comment-delete"
+onclick="deleteComment(${post.id},${cindex})">
+
+Apagar
+
 </button>
+
+</div>
+
+`;
+
+}).join("")}
+
+
+<div class="comment-box">
+
+<input
+id="commentInput${post.id}"
+placeholder="Escreva um comentário...">
+
+<button onclick="addComment(${post.id})">
+Enviar
+</button>
+
+</div>
 
 </div>
 
@@ -1019,43 +1481,127 @@ ${post.hideLikes?"👁 Mostrar curtidas":"🙈 Ocultar curtidas"}
 
 `;
 
-}).join("")+
-'</div>';
-
 }
 
 
 /* CURTIR */
 
-function likePost(index){
+function likePost(id){
 
-let posts=
-JSON.parse(
-localStorage.getItem("minhas_publicacoes")||"[]"
-);
+const posts=getPosts();
 
-if(!posts[index])return;
+const post=posts.find(function(p){
+return p.id===id;
+});
 
-if(posts[index].liked){
+if(!post)return;
 
-posts[index].liked=false;
+if(post.liked){
 
-posts[index].likes=
-Math.max(0,(posts[index].likes||0)-1);
+post.liked=false;
+
+post.likes=
+Math.max(0,(post.likes||0)-1);
 
 }else{
 
-posts[index].liked=true;
+post.liked=true;
 
-posts[index].likes=
-(posts[index].likes||0)+1;
+post.likes=
+(post.likes||0)+1;
 
 }
 
-localStorage.setItem(
-"minhas_publicacoes",
-JSON.stringify(posts)
-);
+savePosts(posts);
+
+loadPosts();
+
+}
+
+
+/* COMENTÁRIOS */
+
+function toggleComments(id){
+
+const box=
+document.getElementById("comments"+id);
+
+if(!box)return;
+
+box.style.display=
+box.style.display==="none"
+?
+"block"
+:
+"none";
+
+}
+
+
+/* ADICIONAR COMENTÁRIO */
+
+function addComment(id){
+
+const input=
+document.getElementById("commentInput"+id);
+
+if(!input)return;
+
+const text=input.value.trim();
+
+if(!text)return;
+
+const posts=getPosts();
+
+const post=posts.find(function(p){
+return p.id===id;
+});
+
+if(!post)return;
+
+if(!post.comments){
+post.comments=[];
+}
+
+post.comments.push({
+
+author:
+localStorage.getItem("profileName")||"Meu Perfil",
+
+text:text
+
+});
+
+savePosts(posts);
+
+loadPosts();
+
+setTimeout(function(){
+toggleComments(id);
+},50);
+
+}
+
+
+/* APAGAR COMENTÁRIO */
+
+function deleteComment(id,index){
+
+if(!confirm("Apagar este comentário?")){
+return;
+}
+
+const posts=getPosts();
+
+const post=posts.find(function(p){
+return p.id===id;
+});
+
+if(!post||!post.comments)return;
+
+post.comments.splice(index,1);
+
+savePosts(posts);
 
 loadPosts();
 
@@ -1064,29 +1610,44 @@ loadPosts();
 
 /* REPUBLICAR */
 
-function repostPost(index){
+function repostPost(id){
 
-let posts=
-JSON.parse(
-localStorage.getItem("minhas_publicacoes")||"[]"
-);
+const posts=getPosts();
 
-if(!posts[index])return;
+const original=posts.find(function(p){
+return p.id===id;
+});
+
+if(!original)return;
+
+if(original.reposted){
+
+alert("Esta publicação já foi republicada.");
+
+return;
+
+}
 
 const copy=
-JSON.parse(JSON.stringify(posts[index]));
+JSON.parse(JSON.stringify(original));
+
+copy.id=
+Date.now();
 
 copy.reposted=true;
+
+copy.originalId=
+original.id;
+
 copy.likes=0;
+
 copy.liked=false;
-copy.id=Date.now();
 
-posts.unshift(copy);
+copy.comments=[];
 
-localStorage.setItem(
-"minhas_publicacoes",
-JSON.stringify(posts)
-);
+posts.push(copy);
+
+savePosts(posts);
 
 alert("Publicação republicada!");
 
@@ -1095,12 +1656,62 @@ loadPosts();
 }
 
 
-/* MENU 3 PONTOS */
+/* REMOVER REPUBLICAÇÃO */
 
-function togglePostMenu(index){
+function removeRepost(id){
+
+if(!confirm("Remover esta republicação do seu perfil?")){
+return;
+}
+
+let posts=getPosts();
+
+posts=
+posts.filter(function(post){
+return post.id!==id;
+});
+
+savePosts(posts);
+
+alert("Republicação removida.");
+
+loadReposts();
+
+}
+
+
+/* APAGAR PUBLICAÇÃO */
+
+function deletePost(id){
+
+if(!confirm("Apagar esta publicação?")){
+return;
+}
+
+let posts=getPosts();
+
+posts=
+posts.filter(function(post){
+
+return post.id!==id;
+
+});
+
+savePosts(posts);
+
+alert("Publicação apagada.");
+
+loadPosts();
+
+}
+
+
+/* MENU */
+
+function togglePostMenu(id){
 
 const menu=
-document.getElementById("postMenu"+index);
+document.getElementById("postMenu"+id);
 
 if(!menu)return;
 
@@ -1114,26 +1725,66 @@ menu.style.display==="block"
 }
 
 
-/* MOSTRAR / OCULTAR CURTIDAS */
+/* CURTIDAS */
 
-function toggleHideLikes(index){
+function toggleHideLikes(id){
 
-let posts=
-JSON.parse(
-localStorage.getItem("minhas_publicacoes")||"[]"
-);
+const posts=getPosts();
 
-if(!posts[index])return;
+const post=posts.find(function(p){
+return p.id===id;
+});
 
-posts[index].hideLikes=
-!posts[index].hideLikes;
+if(!post)return;
 
-localStorage.setItem(
-"minhas_publicacoes",
-JSON.stringify(posts)
-);
+post.hideLikes=
+!post.hideLikes;
+
+savePosts(posts);
 
 loadPosts();
+
+}
+
+
+/* PRESSIONAR E SEGURAR */
+
+let holdTimer=null;
+
+function startHold(event,id){
+
+holdTimer=
+setTimeout(function(){
+
+const posts=getPosts();
+
+const post=posts.find(function(p){
+return p.id===id;
+});
+
+if(post&&post.reposted){
+
+if(confirm("Remover esta republicação do seu perfil?")){
+
+removeRepost(id);
+
+}
+
+}
+
+},700);
+
+}
+
+function cancelHold(){
+
+if(holdTimer){
+
+clearTimeout(holdTimer);
+
+holdTimer=null;
+
+}
 
 }
 
@@ -1167,22 +1818,25 @@ document.body.classList.toggle("dark");
 document.getElementById("themeText").textContent=
 dark?"Escuro":"Claro";
 
-if(dark){
-
-document.body.style.background="#111";
-document.body.style.color="#fff";
-
-}else{
-
-document.body.style.background="#fff";
-document.body.style.color="#171717";
-
-}
-
 localStorage.setItem(
 "theme",
 dark?"dark":"light"
 );
+
+}
+
+function loadTheme(){
+
+const theme=
+localStorage.getItem("theme");
+
+if(theme==="dark"){
+
+document.body.classList.add("dark");
+
+document.getElementById("themeText").textContent="Escuro";
+
+}
 
 }
 
@@ -1200,7 +1854,7 @@ alert("Você saiu da conta.");
 }
 
 
-/* EXCLUIR */
+/* EXCLUIR CONTA */
 
 function deleteAccount(){
 
@@ -1217,14 +1871,18 @@ location.reload();
 }
 
 
-/* INÍCIO */
+/* INICIAR */
 
 loadProfile();
+
+loadTheme();
 
 showTab(
 "Minhu",
 document.querySelector(".tabs button")
 );
 
-</script></body>
+</script>
+
+</body>
   </html>
