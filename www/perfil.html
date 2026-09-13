@@ -43,7 +43,9 @@ margin:auto;
 padding:25px 18px;
 }
 
-.profile-head{text-align:center}
+.profile-head{
+text-align:center;
+}
 
 .avatar{
 width:92px;
@@ -83,10 +85,12 @@ line-height:1.5;
 display:flex;
 justify-content:center;
 gap:35px;
-margin:20px 0;
+margin:30px 0;
 }
 
-.stat{text-align:center}
+.stat{
+text-align:center;
+}
 
 .stat strong{
 display:block;
@@ -118,7 +122,7 @@ color:#fff;
 }
 
 .group{
-margin-top:25px;
+margin-top:30px;
 border:1px solid #e5e5e5;
 border-radius:18px;
 padding:18px;
@@ -185,10 +189,116 @@ border:1px dashed #ccc;
 border-radius:18px;
 }
 
-.empty div{
-font-size:38px;
-margin-bottom:10px;
+/* PUBLICAÇÕES MINHU */
+
+.posts{
+display:flex;
+flex-direction:column;
+gap:22px;
 }
+
+.post{
+border:1px solid #e8e8e8;
+border-radius:18px;
+overflow:hidden;
+background:#fff;
+box-shadow:0 2px 10px rgba(0,0,0,.04);
+}
+
+.post-media{
+width:100%;
+aspect-ratio:4/5;
+background:#eee;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.post-media img,
+.post-media video{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.post-info{
+padding:13px 15px 15px;
+}
+
+.post-author{
+font-weight:bold;
+font-size:14px;
+margin-bottom:8px;
+}
+
+.post-caption{
+font-size:14px;
+line-height:1.45;
+white-space:pre-wrap;
+}
+
+.hashtag{
+color:#e00000;
+font-weight:bold;
+}
+
+.post-actions{
+display:flex;
+align-items:center;
+gap:18px;
+margin-top:13px;
+}
+
+.post-action{
+border:0;
+background:none;
+font-size:22px;
+cursor:pointer;
+padding:0;
+}
+
+.post-action.liked{
+color:#1976ff;
+}
+
+.likes-count{
+font-size:12px;
+color:#777;
+}
+
+.repost{
+font-size:20px;
+}
+
+.more{
+margin-left:auto;
+font-size:23px;
+}
+
+.post-menu{
+display:none;
+border-top:1px solid #eee;
+padding:8px 15px;
+background:#fafafa;
+}
+
+.post-menu button{
+display:block;
+width:100%;
+padding:11px;
+border:0;
+background:none;
+text-align:left;
+font-size:14px;
+}
+
+.post-menu button:hover{
+background:#eee;
+border-radius:8px;
+}
+
+/* MODAL */
 
 .modal{
 display:none;
@@ -214,7 +324,9 @@ justify-content:space-between;
 align-items:center;
 }
 
-.modal-head h2{margin:0}
+.modal-head h2{
+margin:0;
+}
 
 .close{
 border:0;
@@ -232,7 +344,8 @@ font-size:13px;
 margin:17px 0 7px;
 }
 
-input,textarea{
+input,
+textarea{
 width:100%;
 padding:13px;
 border:1px solid #ddd;
@@ -255,6 +368,8 @@ background:#171717;
 color:#fff;
 font-weight:bold;
 }
+
+/* CONFIGURAÇÕES */
 
 .settings-list{
 display:none;
@@ -285,7 +400,9 @@ border-radius:10px;
 padding:8px 12px;
 }
 
-.danger{color:#d00}
+.danger{
+color:#d00;
+}
 
 .internal-page{
 display:none;
@@ -315,6 +432,8 @@ font-size:26px;
 padding:0;
 margin-bottom:10px;
 }
+
+/* BARRA INFERIOR */
 
 .bottom{
 position:fixed;
@@ -347,11 +466,11 @@ margin-top:4px;
 color:#111;
 font-weight:bold;
 }
-</style></head><body><header class="top"><button onclick="goBack()">←</button>
-
-<h1 id="topTitle">Perfil</h1><button onclick="openSettings()">⚙️</button>
-
-</header><main class="profile"><!-- PERFIL --><section id="profilePage"><div class="profile-head"><div class="avatar" id="avatar">♙</div><h2 class="name" id="profileName">Meu Perfil</h2><p class="bio" id="profileBio">
+</style></head><body><header class="top">
+<button onclick="goBack()">←</button>
+<h1 id="topTitle">Perfil</h1>
+<button onclick="openSettings()">⚙️</button>
+</header><main class="profile"><section id="profilePage"><div class="profile-head"><div class="avatar" id="avatar">♙</div><h2 class="name" id="profileName">Meu Perfil</h2><p class="bio" id="profileBio">
 Adicione uma biografia ao seu perfil.
 </p></div><div class="stats"><div class="stat">
 <strong id="followers">0</strong>
@@ -362,27 +481,20 @@ Adicione uma biografia ao seu perfil.
 </div><div class="stat">
 <strong>0</strong>
 <span>Grupo Mega</span>
-</div></div><div class="profile-actions"><button class="edit" onclick="openEdit()">
-Editar perfil
-</button></div><section class="group"><h2>👥 Grupo Mega</h2><p>Conecte suas redes sociais ao seu perfil.</p><div class="social"><button onclick="connect('Instagram')">Instagram</button>
-
+</div></div><div class="profile-actions">
+<button class="edit" onclick="openEdit()">Editar perfil</button>
+</div><section class="group"><h2>👥 Grupo Mega</h2><p>Conecte suas redes sociais ao seu perfil.</p><div class="social"><button onclick="connect('Instagram')">Instagram</button>
 <button onclick="connect('WhatsApp')">WhatsApp</button>
-
 <button onclick="connect('Telegram')">Telegram</button>
 
-</div></section><div class="tabs"><button class="active" onclick="showTab('Minhu',this)">Minhu</button>
-
+</div>
+</section><div class="tabs"><button class="active" onclick="showTab('Minhu',this)">Minhu</button>
 <button onclick="showTab('Manhwa',this)">Manhwa</button>
-
 <button onclick="showTab('Manhua',this)">Manhua</button>
-
 <button onclick="showTab('Mangá',this)">Mangá</button>
-
 <button onclick="showTab('Novel',this)">Novel</button>
 
-</div><div class="content"><div class="empty" id="tabContent"><div>✦</div><strong>Nenhuma publicação ainda</strong>
-
-<p>Suas publicações aparecerão aqui.</p></div></div></section><!-- CONFIGURAÇÕES --><section class="settings-list" id="settingsPage"><div class="setting"><div class="setting-left">
+</div><div class="content"><div id="tabContent"></div></div></section><!-- CONFIGURAÇÕES --><section class="settings-list" id="settingsPage"><div class="setting"><div class="setting-left">
 <strong>👤 Conta</strong>
 <span>Gerenciar sua conta</span>
 </div><button onclick="openAccount()">›</button>
@@ -412,42 +524,36 @@ Editar perfil
 <span>Excluir permanentemente</span>
 </div><button onclick="deleteAccount()">Excluir</button>
 
-</div></section><!-- PÁGINA CONTA --><section class="internal-page" id="accountPage"><button class="page-back" onclick="backToSettings()">←</button>
+</div></section><!-- CONTA --><section class="internal-page" id="accountPage"><button class="page-back" onclick="backToSettings()">←</button>
 
 <h2>Conta</h2><p>Gerencie as informações da sua conta.</p><div class="page-card"><strong>Nome do perfil</strong>
 
-<p id="accountName">Meu Perfil</p></div></section><!-- PÁGINA E-MAIL E SENHA --><section class="internal-page" id="emailPage"><button class="page-back" onclick="backToSettings()">←</button>
+<p id="accountName">Meu Perfil</p></div></section><!-- EMAIL --><section class="internal-page" id="emailPage"><button class="page-back" onclick="backToSettings()">←</button>
 
 <h2>E-mail e senha</h2><p>Altere seus dados de acesso.</p><div class="page-card"><label>E-mail</label>
 
 <input
 id="emailInput"
 type="email"
-placeholder="seuemail@email.com"
-
-«»
+placeholder="seuemail@email.com">
 
 <label>Nova senha</label>
 
 <input
 id="passwordInput"
 type="password"
-placeholder="Digite uma nova senha"
-
-«»
+placeholder="Digite uma nova senha">
 
 <button class="save" onclick="saveAccess()">
 Salvar alterações
-</button></div></section><!-- PÁGINA CELULAR --><section class="internal-page" id="phonePage"><button class="page-back" onclick="backToSettings()">←</button>
+</button></div></section><!-- CELULAR --><section class="internal-page" id="phonePage"><button class="page-back" onclick="backToSettings()">←</button>
 
 <h2>Número de celular</h2><p>Adicione ou altere o número associado à sua conta.</p><div class="page-card"><label>Número de celular</label>
 
 <input
 id="phoneInput"
 type="tel"
-placeholder="(00) 00000-0000"
-
-«»
+placeholder="(00) 00000-0000">
 
 <button class="save" onclick="savePhone()">
 Salvar número
@@ -459,25 +565,20 @@ Salvar número
 type="file"
 id="photo"
 accept="image/*"
-onchange="previewAvatar(this)"
-
-«»
+onchange="previewAvatar(this)">
 
 <label>Nome</label>
 
 <input
 id="editName"
 type="text"
-placeholder="Nome do perfil"
-
-«»
+placeholder="Nome do perfil">
 
 <label>Biografia</label>
 
 <textarea
 id="editBio"
-placeholder="Escreva sua biografia..."
-></textarea><button class="save" onclick="saveProfile()">
+placeholder="Escreva sua biografia..."></textarea><button class="save" onclick="saveProfile()">
 Salvar alterações
 </button></div></div><nav class="bottom"><button onclick="go('index.html')">
 ⌂
@@ -519,7 +620,6 @@ document.getElementById("topTitle").textContent="Configurações";
 
 }
 
-
 function backToSettings(){
 
 hideAllPages();
@@ -530,23 +630,18 @@ document.getElementById("topTitle").textContent="Configurações";
 
 }
 
-
 function hideAllPages(){
 
 document.getElementById("profilePage").style.display="none";
-
 document.getElementById("settingsPage").style.display="none";
-
 document.getElementById("accountPage").style.display="none";
-
 document.getElementById("emailPage").style.display="none";
-
 document.getElementById("phonePage").style.display="none";
 
 }
 
 
-/* E-MAIL */
+/* EMAIL */
 
 function openEmail(){
 
@@ -561,25 +656,20 @@ localStorage.getItem("email")||"";
 
 }
 
-
-/* SENHA E E-MAIL */
-
 function saveAccess(){
 
-const email=document.getElementById("emailInput").value.trim();
+const email=
+document.getElementById("emailInput").value.trim();
 
-const password=document.getElementById("passwordInput").value;
+const password=
+document.getElementById("passwordInput").value;
 
 if(email){
-
 localStorage.setItem("email",email);
-
 }
 
 if(password){
-
 localStorage.setItem("password",password);
-
 }
 
 alert("Dados salvos no aparelho.");
@@ -602,10 +692,10 @@ localStorage.getItem("phone")||"";
 
 }
 
-
 function savePhone(){
 
-const phone=document.getElementById("phoneInput").value.trim();
+const phone=
+document.getElementById("phoneInput").value.trim();
 
 if(!phone){
 
@@ -648,7 +738,6 @@ document.getElementById("profileBio").textContent;
 document.getElementById("editModal").style.display="block";
 
 }
-
 
 function closeEdit(){
 
@@ -707,7 +796,8 @@ localStorage.setItem("profileBio",bio);
 
 }
 
-document.getElementById("accountName").textContent=name||"Meu Perfil";
+document.getElementById("accountName").textContent=
+name||"Meu Perfil";
 
 closeEdit();
 
@@ -721,15 +811,12 @@ alert("Perfil salvo!");
 function loadProfile(){
 
 const name=localStorage.getItem("profileName");
-
 const bio=localStorage.getItem("profileBio");
-
 const photo=localStorage.getItem("profilePhoto");
 
 if(name){
 
 document.getElementById("profileName").textContent=name;
-
 document.getElementById("accountName").textContent=name;
 
 }
@@ -750,7 +837,19 @@ document.getElementById("avatar").innerHTML=
 }
 
 
-/* CATEGORIAS */
+/* HASHTAGS */
+
+function formatCaption(text){
+
+return text.replace(
+/(#[\p{L}\p{N}_]+)/gu,
+'<span class="hashtag">$1</span>'
+);
+
+}
+
+
+/* MINHU */
 
 function showTab(name,button){
 
@@ -761,25 +860,280 @@ btn.classList.remove("active");
 
 button.classList.add("active");
 
-const content=document.getElementById("tabContent");
+const content=
+document.getElementById("tabContent");
 
 if(name==="Minhu"){
 
-content.innerHTML=`
-<div>✦</div>
-<strong>Nenhuma publicação ainda</strong>
-<p>Suas mídias aparecerão aqui.</p>
-`;
+loadPosts();
 
-}else{
+return;
+
+}
 
 content.innerHTML=`
+
+<div class="empty">
+
 <div>📖</div>
+
 <strong>Nenhuma obra em ${name}</strong>
+
 <p>As suas obras aparecerão aqui.</p>
+
+</div>
+
 `;
 
 }
+
+
+/* CARREGAR PUBLICAÇÕES */
+
+function loadPosts(){
+
+const content=
+document.getElementById("tabContent");
+
+let posts=
+JSON.parse(
+localStorage.getItem("minhas_publicacoes")||"[]"
+);
+
+if(posts.length===0){
+
+content.innerHTML=`
+
+<div class="empty">
+
+<div>✦</div>
+
+<strong>Nenhuma publicação ainda</strong>
+
+<p>Suas mídias aparecerão aqui.</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+content.innerHTML=
+'<div class="posts">'+
+posts.map(function(post,index){
+
+const media=
+post.type==="video"
+
+?
+
+`<video src="${post.media}" controls></video>`
+
+:
+
+`<img src="${post.media}" alt="Publicação">`;
+
+const likes=
+post.hideLikes
+?
+
+""
+
+:
+
+`<span class="likes-count">
+${post.likes||0} curtidas
+</span>`;
+
+return `
+
+<article class="post">
+
+<div class="post-media">
+
+${media}
+
+</div>
+
+<div class="post-info">
+
+<div class="post-author">
+${localStorage.getItem("profileName")||"Meu Perfil"}
+</div>
+
+<div class="post-caption">
+${formatCaption(post.caption||"")}
+</div>
+
+<div class="post-actions">
+
+<button
+class="post-action ${post.liked?"liked":""}"
+onclick="likePost(${index})">
+
+${post.liked?"♥":"♡"}
+
+</button>
+
+${likes}
+
+<button
+class="post-action repost"
+onclick="repostPost(${index})">
+
+🔁
+
+</button>
+
+<button
+class="post-action more"
+onclick="togglePostMenu(${index})">
+
+⋮
+
+</button>
+
+</div>
+
+</div>
+
+<div
+class="post-menu"
+id="postMenu${index}">
+
+<button onclick="toggleHideLikes(${index})">
+
+${post.hideLikes?"👁 Mostrar curtidas":"🙈 Ocultar curtidas"}
+
+</button>
+
+<button onclick="repostPost(${index})">
+🔁 Republicar
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}).join("")+
+'</div>';
+
+}
+
+
+/* CURTIR */
+
+function likePost(index){
+
+let posts=
+JSON.parse(
+localStorage.getItem("minhas_publicacoes")||"[]"
+);
+
+if(!posts[index])return;
+
+if(posts[index].liked){
+
+posts[index].liked=false;
+
+posts[index].likes=
+Math.max(0,(posts[index].likes||0)-1);
+
+}else{
+
+posts[index].liked=true;
+
+posts[index].likes=
+(posts[index].likes||0)+1;
+
+}
+
+localStorage.setItem(
+"minhas_publicacoes",
+JSON.stringify(posts)
+);
+
+loadPosts();
+
+}
+
+
+/* REPUBLICAR */
+
+function repostPost(index){
+
+let posts=
+JSON.parse(
+localStorage.getItem("minhas_publicacoes")||"[]"
+);
+
+if(!posts[index])return;
+
+const copy=
+JSON.parse(JSON.stringify(posts[index]));
+
+copy.reposted=true;
+copy.likes=0;
+copy.liked=false;
+copy.id=Date.now();
+
+posts.unshift(copy);
+
+localStorage.setItem(
+"minhas_publicacoes",
+JSON.stringify(posts)
+);
+
+alert("Publicação republicada!");
+
+loadPosts();
+
+}
+
+
+/* MENU 3 PONTOS */
+
+function togglePostMenu(index){
+
+const menu=
+document.getElementById("postMenu"+index);
+
+if(!menu)return;
+
+menu.style.display=
+menu.style.display==="block"
+?
+"none"
+:
+"block";
+
+}
+
+
+/* MOSTRAR / OCULTAR CURTIDAS */
+
+function toggleHideLikes(index){
+
+let posts=
+JSON.parse(
+localStorage.getItem("minhas_publicacoes")||"[]"
+);
+
+if(!posts[index])return;
+
+posts[index].hideLikes=
+!posts[index].hideLikes;
+
+localStorage.setItem(
+"minhas_publicacoes",
+JSON.stringify(posts)
+);
+
+loadPosts();
 
 }
 
@@ -789,21 +1143,15 @@ content.innerHTML=`
 function connect(service){
 
 if(service==="Instagram"){
-
 window.open("https://www.instagram.com/","_blank");
-
 }
 
 if(service==="WhatsApp"){
-
 window.open("https://web.whatsapp.com/","_blank");
-
 }
 
 if(service==="Telegram"){
-
 window.open("https://web.telegram.org/","_blank");
-
 }
 
 }
@@ -822,18 +1170,19 @@ dark?"Escuro":"Claro";
 if(dark){
 
 document.body.style.background="#111";
-
 document.body.style.color="#fff";
 
 }else{
 
 document.body.style.background="#fff";
-
 document.body.style.color="#171717";
 
 }
 
-localStorage.setItem("theme",dark?"dark":"light");
+localStorage.setItem(
+"theme",
+dark?"dark":"light"
+);
 
 }
 
@@ -868,7 +1217,14 @@ location.reload();
 }
 
 
+/* INÍCIO */
+
 loadProfile();
+
+showTab(
+"Minhu",
+document.querySelector(".tabs button")
+);
 
 </script></body>
   </html>
