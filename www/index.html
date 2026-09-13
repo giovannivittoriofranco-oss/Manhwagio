@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Meu Manhwa</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <button class="icon-btn">‹</button>
+    <strong>Meu Estúdio</strong>
+    <button class="icon-btn">↻</button>
+  </header>
+
+  <main>
+    <section class="brand-row">
+      <div class="brand">
+        <div class="mascot">🐹</div>
+        <div class="logo">MANHWA</div>
+      </div>
+      <div class="top-actions">
+        <span>🪙 2</span>
+        <button class="simple">♧</button>
+        <button class="simple">⌕</button>
+      </div>
+    </section>
+
+    <section class="notice">
+      <h2>✨ Novidades do leitor</h2>
+      <button class="understood">Entendi</button>
+
+      <div class="notice-card">
+        <b>🔗 Páginas vinculadas (página dupla automática)</b>
+        <p>Ao editar um capítulo, você poderá vincular páginas seguidas para aparecerem lado a lado.</p>
+      </div>
+
+      <div class="notice-card">
+        <b>⇄ Modo oriental (direita → esquerda)</b>
+        <p>Ative a leitura oriental para mangás. A preferência pode ficar salva.</p>
+      </div>
+
+      <div class="notice-card">
+        <b>▣ Página dupla no leitor</b>
+        <p>No computador, a paginação pode mostrar duas páginas lado a lado.</p>
+      </div>
+    </section>
+
+    <section class="tools">
+      <div class="tool"><span>🪙</span><b>Carteira</b><small>Apoios mensais</small></div>
+      <div class="tool"><span>📣</span><b>Divulgue</b><small>Apareça na home</small></div>
+      <div class="tool"><span>♡</span><b>apoia.manhwa</b><small>Crie campanhas</small></div>
+    </section>
+
+    <section class="works">
+      <h1>Minhas Obras</h1>
+
+      <div class="buttons">
+        <button class="primary" onclick="openModal()">＋ Adicionar Obra</button>
+        <button class="secondary">▣ Criar Novel</button>
+      </div>
+
+      <div id="empty" class="empty">
+        <div>🐭</div>
+        <p>Nenhuma obra ainda. Crie a sua primeira!</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom">
+    <button>⌂<small>Início</small></button>
+    <button>♧<small>Feed</small></button>
+    <button>◈<small>Descobrir</small></button>
+    <button class="active">▣<small>Meu Estúdio</small></button>
+    <button>♙<small>Perfil</small></button>
+  </nav>
+
+  <div id="modal" class="overlay">
+    <div class="modal">
+      <button class="close" onclick="closeModal()">×</button>
+      <h2>Adicionar Nova Obra</h2>
+
+      <div class="uploads">
+        <label>
+          <span>Capa (poster vertical) *</span>
+          <input type="file" accept="image/*" onchange="preview(this,'coverPreview')">
+          <div id="coverPreview" class="upload-box">
+            ⇧<br><u>Upload</u><br>
+            <small>1200×1800px · até 12 MB</small>
+          </div>
+        </label>
+
+        <label>
+          <span>Banner (capa horizontal) *</span>
+          <input type="file" accept="image/*" onchange="preview(this,'bannerPreview')">
+          <div id="bannerPreview" class="upload-box banner">
+            ⇧<br><u>Upload</u><br>
+            <small>1600×900px · até 12 MB</small>
+          </div>
+        </label>
+      </div>
+
+      <label class="field">
+        <span>Título da obra *</span>
+        <input id="title" placeholder="Adicione aqui um título">
+      </label>
+
+      <div class="field">
+        <span>Modo de leitura</span>
+        <div class="choice-row">
+          <button class="choice selected">● Rolagem</button>
+          <button class="choice">□ Paginação</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <span>Classificação indicativa *</span>
+        <div class="ratings">
+          <button>L</button>
+          <button>6</button>
+          <button>10</button>
+          <button>12</button>
+          <button>14</button>
+          <button>16</button>
+          <button>18+</button>
+        </div>
+      </div>
+
+      <label class="field">
+        <span>Descrição *</span>
+        <textarea id="desc" placeholder="Fale um pouco sobre sua obra..."></textarea>
+      </label>
+
+      <div class="two">
+        <label class="field">
+          <span>Gênero 1 *</span>
+          <select>
+            <option>Selecione...</option>
+            <option>Romance</option>
+            <option>BL</option>
+            <option>Ação</option>
+            <option>Fantasia</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Gênero 2 *</span>
+          <select>
+            <option>Selecione...</option>
+            <option>Drama</option>
+            <option>Comédia</option>
+            <option>Escolar</option>
+            <option>Suspense</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button class="cancel" onclick="closeModal()">Cancelar</button>
+        <button class="primary" onclick="createWork()">Criar Obra</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+    </html>
