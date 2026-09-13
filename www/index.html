@@ -1,12 +1,127 @@
 <!doctype html>
+
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Meu Manhwa</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">  <style>
+    /* LOGO NOVA */
+    .app-logo {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 155px;
+      height: 58px;
+      padding: 5px 12px;
+      border-radius: 18px;
+      background: #fff0f6;
+      color: #d94b82;
+      font-weight: 900;
+      font-size: 17px;
+      letter-spacing: 1px;
+      overflow: hidden;
+      box-shadow: 0 3px 12px rgba(220, 100, 150, .12);
+    }
 
-  <style>
+    .app-logo::before {
+      content: "🌶️  ·  🌶️  ·  🌶️  ·  🌶️";
+      position: absolute;
+      inset: 0;
+      font-size: 9px;
+      line-height: 17px;
+      letter-spacing: 4px;
+      opacity: .32;
+      pointer-events: none;
+    }
+
+    .logo-casal {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      height: 43px;
+    }
+
+    .chibi {
+      position: relative;
+      width: 28px;
+      height: 40px;
+    }
+
+    .chibi-cabeca {
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #ffd6c9;
+      border: 2px solid #65384b;
+    }
+
+    .chibi-cabelo {
+      position: absolute;
+      top: 0;
+      left: 2px;
+      width: 26px;
+      height: 14px;
+      border-radius: 14px 14px 5px 5px;
+      background: #40263b;
+      z-index: 2;
+    }
+
+    .chibi-olhos {
+      position: absolute;
+      top: 11px;
+      left: 8px;
+      z-index: 3;
+      font-size: 7px;
+      letter-spacing: 5px;
+    }
+
+    .chibi-corpo {
+      position: absolute;
+      bottom: 0;
+      left: 6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 9px 9px 5px 5px;
+      background: #d95b8c;
+      border: 2px solid #65384b;
+    }
+
+    .chibi-menino .chibi-corpo {
+      background: #7c5aa6;
+    }
+
+    .chibi-menino .chibi-cabelo {
+      background: #211d35;
+    }
+
+    .logo-nome {
+      position: relative;
+      z-index: 3;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .logo-pimenta {
+      position: absolute;
+      z-index: 1;
+      font-size: 9px;
+      opacity: .45;
+    }
+
+    .lp1 { top: 4px; left: 7px; }
+    .lp2 { top: 9px; right: 7px; }
+    .lp3 { bottom: 5px; left: 13px; }
+    .lp4 { bottom: 3px; right: 18px; }
+    .lp5 { top: 27px; left: 2px; }
+    .lp6 { top: 30px; right: 3px; }
+
     .home-posts {
       margin-top: 25px;
     }
@@ -65,171 +180,171 @@
       border-color: #444;
       color: #aaa;
     }
-  </style>
-</head>
+  </style></head><body>  <header class="home-header"><div class="app-logo">
 
-<body>
+  <span class="logo-pimenta lp1">🌶️</span>
+  <span class="logo-pimenta lp2">🌶️</span>
+  <span class="logo-pimenta lp3">🌶️</span>
+  <span class="logo-pimenta lp4">🌶️</span>
+  <span class="logo-pimenta lp5">🌶️</span>
+  <span class="logo-pimenta lp6">🌶️</span>
 
-  <header class="home-header">
-    <div class="app-logo">✦ MANHWA</div>
+  <div class="logo-casal">
 
-    <div class="header-actions">
-      <button>⌕</button>
-      <button onclick="openScreen('perfil.html')">♙</button>
+    <div class="chibi chibi-menino">
+      <div class="chibi-cabelo"></div>
+      <div class="chibi-cabeca"></div>
+      <div class="chibi-olhos">● ●</div>
+      <div class="chibi-corpo"></div>
     </div>
-  </header>
 
-  <main class="home">
+    <div class="chibi">
+      <div class="chibi-cabelo"></div>
+      <div class="chibi-cabeca"></div>
+      <div class="chibi-olhos">● ●</div>
+      <div class="chibi-corpo"></div>
+    </div>
 
-    <section class="hero">
-      <div class="sketch sketch-1">♡</div>
-      <div class="sketch sketch-2">✦</div>
-      <div class="sketch sketch-3">♢</div>
-      <div class="sketch sketch-4">♡</div>
-      <div class="sketch sketch-5">✧</div>
+  </div>
 
-      <div class="hero-text">
-        <span>SEU UNIVERSO</span>
+  <span class="logo-nome">MEU MANHWA</span>
 
-        <h1>Leia.<br>Crie.<br>Viva histórias.</h1>
+</div>
 
-        <p>
-          Descubra novos manhwas e acompanhe suas histórias favoritas.
-        </p>
+<div class="header-actions">
+  <button>⌕</button>
+  <button onclick="openScreen('perfil.html')">♙</button>
+</div>
 
-        <button
-          class="discover-btn"
-          onclick="openScreen('descobrir.html')">
-          Descobrir manhwas →
-        </button>
-      </div>
+  </header>  <main class="home"><section class="hero">
+  <div class="sketch sketch-1">♡</div>
+  <div class="sketch sketch-2">✦</div>
+  <div class="sketch sketch-3">♢</div>
+  <div class="sketch sketch-4">♡</div>
+  <div class="sketch sketch-5">✧</div>
 
-      <div class="couples">
-        <div class="couple c1">♧ ♡ ♧</div>
-        <div class="couple c2">♧ ♡ ♧</div>
-        <div class="couple c3">♧ ♡ ♧</div>
-        <div class="couple c4">♧ ♡ ♧</div>
-        <div class="couple c5">♧ ♡ ♧</div>
-        <div class="couple c6">♧ ♡ ♧</div>
-      </div>
-    </section>
+  <div class="hero-text">
+    <span>SEU UNIVERSO</span>
 
+    <h1>Leia.<br>Crie.<br>Viva histórias.</h1>
 
-    <!-- PUBLICAÇÕES RECENTES -->
+    <p>
+      Descubra novos manhwas e acompanhe suas histórias favoritas.
+    </p>
 
-    <section class="section home-posts">
-
-      <div class="section-title">
-        <h2>Publicações recentes</h2>
-        <button onclick="openScreen('feed.html')">
-          Ver tudo →
-        </button>
-      </div>
-
-      <div id="homePosts"></div>
-
-    </section>
-
-
-    <!-- DESTAQUES -->
-
-    <section class="section">
-
-      <div class="section-title">
-        <h2>Em destaque</h2>
-
-        <button onclick="openScreen('descobrir.html')">
-          Ver tudo →
-        </button>
-      </div>
-
-      <div class="cards">
-
-        <div class="manhwa-card">
-          <div class="cover">♡</div>
-          <b>Histórias populares</b>
-          <small>Romance · BL</small>
-        </div>
-
-        <div class="manhwa-card">
-          <div class="cover">✦</div>
-          <b>Novos capítulos</b>
-          <small>Atualizados hoje</small>
-        </div>
-
-        <div class="manhwa-card">
-          <div class="cover">♢</div>
-          <b>Para você</b>
-          <small>Recomendados</small>
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- CONTINUE LENDO -->
-
-    <section class="section latest">
-
-      <div class="section-title">
-        <h2>Continue lendo</h2>
-
-        <button>
-          Ver biblioteca →
-        </button>
-      </div>
-
-      <div class="empty-reading">
-        <span>✧</span>
-
-        <h3>Nada por aqui ainda</h3>
-
-        <p>
-          Comece a ler um manhwa e ele aparecerá aqui.
-        </p>
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- MENU INFERIOR -->
-
-  <nav class="bottom">
-
-    <button class="active">
-      ⌂
-      <small>Início</small>
+    <button
+      class="discover-btn"
+      onclick="openScreen('descobrir.html')">
+      Descobrir manhwas →
     </button>
+  </div>
+
+  <div class="couples">
+    <div class="couple c1">♧ ♡ ♧</div>
+    <div class="couple c2">♧ ♡ ♧</div>
+    <div class="couple c3">♧ ♡ ♧</div>
+    <div class="couple c4">♧ ♡ ♧</div>
+    <div class="couple c5">♧ ♡ ♧</div>
+    <div class="couple c6">♧ ♡ ♧</div>
+  </div>
+</section>
+
+<section class="section home-posts">
+
+  <div class="section-title">
+    <h2>Publicações recentes</h2>
 
     <button onclick="openScreen('feed.html')">
-      ♧
-      <small>Feed</small>
+      Ver tudo →
     </button>
+  </div>
+
+  <div id="homePosts"></div>
+
+</section>
+
+<section class="section">
+
+  <div class="section-title">
+    <h2>Em destaque</h2>
 
     <button onclick="openScreen('descobrir.html')">
-      ◈
-      <small>Descobrir</small>
+      Ver tudo →
     </button>
+  </div>
 
-    <button onclick="openScreen('estudio.html')">
-      ▣
-      <small>Meu Estúdio</small>
+  <div class="cards">
+
+    <div class="manhwa-card">
+      <div class="cover">♡</div>
+      <b>Histórias populares</b>
+      <small>Romance · BL</small>
+    </div>
+
+    <div class="manhwa-card">
+      <div class="cover">✦</div>
+      <b>Novos capítulos</b>
+      <small>Atualizados hoje</small>
+    </div>
+
+    <div class="manhwa-card">
+      <div class="cover">♢</div>
+      <b>Para você</b>
+      <small>Recomendados</small>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section latest">
+
+  <div class="section-title">
+    <h2>Continue lendo</h2>
+
+    <button>
+      Ver biblioteca →
     </button>
+  </div>
 
-    <button onclick="openScreen('perfil.html')">
-      ♙
-      <small>Perfil</small>
-    </button>
+  <div class="empty-reading">
+    <span>✧</span>
 
-  </nav>
+    <h3>Nada por aqui ainda</h3>
 
+    <p>
+      Comece a ler um manhwa e ele aparecerá aqui.
+    </p>
+  </div>
 
-  <script src="app.js"></script>
+</section>
 
-  <script>
+  </main>  <nav class="bottom"><button class="active">
+  ⌂
+  <small>Início</small>
+</button>
+
+<button onclick="openScreen('feed.html')">
+  ♧
+  <small>Feed</small>
+</button>
+
+<button onclick="openScreen('descobrir.html')">
+  ◈
+  <small>Descobrir</small>
+</button>
+
+<button onclick="openScreen('estudio.html')">
+  ▣
+  <small>Meu Estúdio</small>
+</button>
+
+<button onclick="openScreen('perfil.html')">
+  ♙
+  <small>Perfil</small>
+</button>
+
+  </nav>  <script src="app.js"></script>  <script>
 
     function carregarPublicacoesInicio() {
 
@@ -254,7 +369,6 @@
 
         return;
       }
-
 
       area.innerHTML = publicacoes
         .slice()
@@ -282,7 +396,6 @@
             `;
           }
 
-
           return `
             <article class="home-post">
 
@@ -308,10 +421,7 @@
 
     }
 
-
     carregarPublicacoesInicio();
 
-  </script>
-
-</body>
-      </html>
+  </script></body>
+  </html>
