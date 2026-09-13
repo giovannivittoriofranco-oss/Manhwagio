@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Meu Estúdio</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #171717;
+      padding-bottom: 30px;
+    }
+
+    header {
+      height: 65px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .voltar {
+      border: 0;
+      background: none;
+      font-size: 25px;
+      margin-right: 12px;
+    }
+
+    header h1 {
+      font-size: 21px;
+      margin: 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .intro {
+      margin-bottom: 25px;
+    }
+
+    .intro h2 {
+      font-size: 30px;
+      margin: 0 0 8px;
+    }
+
+    .intro p {
+      color: #777;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid #e5e5e5;
+      border-radius: 20px;
+      padding: 22px;
+      background: white;
+      min-height: 145px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .card:active {
+      transform: scale(.98);
+    }
+
+    .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #888;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section h2 {
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .big-button {
+      width: 100%;
+      border: 0;
+      border-radius: 17px;
+      padding: 17px;
+      background: #171717;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 13px;
+      padding: 13px;
+      margin-bottom: 10px;
+      font-family: Arial;
+      font-size: 14px;
+    }
+
+    textarea {
+      height: 110px;
+      resize: none;
+    }
+
+    .preview {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .preview img {
+      max-width: 100%;
+      max-height: 220px;
+      border-radius: 15px;
+    }
+
+    @media (max-width: 500px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <button class="voltar" onclick="history.back()">‹</button>
+    <h1>Meu Estúdio</h1>
+  </header>
+
+  <main>
+
+    <div class="intro">
+      <h2>Meu Estúdio ✦</h2>
+      <p>
+        Crie suas próprias histórias, personagens e manhwas.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <button class="card" onclick="mostrar('manhwa')">
+        <div class="icon">📖</div>
+        <h3>Criar Manhwa</h3>
+        <p>Comece uma nova história em formato de manhwa.</p>
+      </button>
+
+      <button class="card" onclick="mostrar('novel')">
+        <div class="icon">✍️</div>
+        <h3>Criar Novel</h3>
+        <p>Escreva sua própria história.</p>
+      </button>
+
+      <button class="card" onclick="mostrar('personagem')">
+        <div class="icon">👤</div>
+        <h3>Personagens</h3>
+        <p>Crie e organize os personagens da sua história.</p>
+      </button>
+
+      <button class="card" onclick="mostrar('fotos')">
+        <div class="icon">🖼️</div>
+        <h3>Fotos dos personagens</h3>
+        <p>Adicione imagens para guardar referências.</p>
+      </button>
+
+    </div>
+
+    <div class="section">
+
+      <h2>Introdução da história</h2>
+
+      <textarea id="introducao"
+        placeholder="Escreva aqui a introdução da sua história..."></textarea>
+
+      <button class="big-button" onclick="salvarIntroducao()">
+        Salvar introdução
+      </button>
+
+    </div>
+
+    <div class="section">
+
+      <h2>Adicionar imagem de personagem</h2>
+
+      <input
+        type="file"
+        accept="image/*"
+        onchange="mostrarImagem(event)"
+      >
+
+      <div id="preview" class="preview"></div>
+
+    </div>
+
+    <div class="section">
+
+      <h2>Exportar</h2>
+
+      <button class="big-button" onclick="exportar()">
+        ⬇️ Baixar minha história
+      </button>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    function mostrar(tipo) {
+
+      if (tipo === "manhwa") {
+        alert("Área para criar Manhwa.");
+      }
+
+      if (tipo === "novel") {
+        alert("Área para criar Novel.");
+      }
+
+      if (tipo === "personagem") {
+        alert("Área de personagens.");
+      }
+
+      if (tipo === "fotos") {
+        document.querySelector("input[type=file]").click();
+      }
+
+    }
+
+    function salvarIntroducao() {
+
+      const texto = document.getElementById("introducao").value;
+
+      if (!texto.trim()) {
+        alert("Escreva uma introdução primeiro.");
+        return;
+      }
+
+      localStorage.setItem("introducaoManhwa", texto);
+
+      alert("Introdução salva!");
+
+    }
+
+    function mostrarImagem(event) {
+
+      const arquivo = event.target.files[0];
+
+      if (!arquivo) return;
+
+      const imagem = document.createElement("img");
+
+      imagem.src = URL.createObjectURL(arquivo);
+
+      const preview = document.getElementById("preview");
+
+      preview.innerHTML = "";
+      preview.appendChild(imagem);
+
+    }
+
+    function exportar() {
+
+      const texto =
+        localStorage.getItem("introducaoManhwa") ||
+        "Minha história";
+
+      const arquivo = new Blob(
+        [texto],
+        { type: "text/plain" }
+      );
+
+      const link = document.createElement("a");
+
+      link.href = URL.createObjectURL(arquivo);
+      link.download = "minha-historia.txt";
+
+      link.click();
+
+    }
+
+  </script>
+
+</body>
+    </html>
