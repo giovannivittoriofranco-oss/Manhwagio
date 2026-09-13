@@ -6,308 +6,516 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Meu Manhwa</title>
   <link rel="stylesheet" href="style.css">  <style>
-    /* LOGO NOVA */
-    .app-logo {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      min-width: 155px;
-      height: 58px;
-      padding: 5px 12px;
-      border-radius: 18px;
-      background: #fff0f6;
-      color: #d94b82;
-      font-weight: 900;
-      font-size: 17px;
-      letter-spacing: 1px;
-      overflow: hidden;
-      box-shadow: 0 3px 12px rgba(220, 100, 150, .12);
+    /* ===== NOVA TELA INICIAL ===== */
+
+    .scan-header {
+      padding: 15px 16px 10px;
     }
 
-    .app-logo::before {
-      content: "🌶️  ·  🌶️  ·  🌶️  ·  🌶️";
+    .scan-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .scan-title {
+      font-size: 24px;
+      font-weight: 900;
+      color: #d94b82;
+    }
+
+    .config-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: #fff0f6;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    }
+
+    /* BARRA DE PESQUISA */
+
+    .search-box {
+      margin-top: 14px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px 18px 14px 45px;
+      border: 1px solid #eadde3;
+      border-radius: 18px;
+      background: rgba(255,255,255,.92);
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-icon {
       position: absolute;
-      inset: 0;
-      font-size: 9px;
-      line-height: 17px;
-      letter-spacing: 4px;
-      opacity: .32;
+      left: 17px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #999;
       pointer-events: none;
     }
 
-    .logo-casal {
-      position: relative;
-      z-index: 2;
+    /* CATEGORIAS */
+
+    .categories {
       display: flex;
-      align-items: flex-end;
-      height: 43px;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 14px 0 5px;
+      scrollbar-width: none;
     }
 
-    .chibi {
-      position: relative;
-      width: 28px;
-      height: 40px;
+    .categories::-webkit-scrollbar {
+      display: none;
     }
 
-    .chibi-cabeca {
-      position: absolute;
-      top: 2px;
-      left: 4px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #ffd6c9;
-      border: 2px solid #65384b;
+    .category-btn {
+      flex: 0 0 auto;
+      border: none;
+      border-radius: 15px;
+      padding: 9px 14px;
+      background: #fff0f6;
+      color: #c94779;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    .chibi-cabelo {
-      position: absolute;
-      top: 0;
-      left: 2px;
-      width: 26px;
-      height: 14px;
-      border-radius: 14px 14px 5px 5px;
-      background: #40263b;
-      z-index: 2;
+    .category-btn.active {
+      background: #d94b82;
+      color: white;
     }
 
-    .chibi-olhos {
-      position: absolute;
-      top: 11px;
-      left: 8px;
-      z-index: 3;
-      font-size: 7px;
-      letter-spacing: 5px;
+    /* TÍTULOS */
+
+    .catalog-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 22px 0 13px;
     }
 
-    .chibi-corpo {
-      position: absolute;
-      bottom: 0;
-      left: 6px;
-      width: 20px;
-      height: 20px;
-      border-radius: 9px 9px 5px 5px;
-      background: #d95b8c;
-      border: 2px solid #65384b;
+    .catalog-title h2 {
+      margin: 0;
+      font-size: 20px;
     }
 
-    .chibi-menino .chibi-corpo {
-      background: #7c5aa6;
+    .catalog-title button {
+      border: none;
+      background: transparent;
+      color: #d94b82;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    .chibi-menino .chibi-cabelo {
-      background: #211d35;
+    /* CATÁLOGO DE OBRAS */
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
 
-    .logo-nome {
-      position: relative;
-      z-index: 3;
-      font-size: 15px;
-      white-space: nowrap;
+    .work-card {
+      min-width: 0;
+      cursor: pointer;
     }
 
-    .logo-pimenta {
-      position: absolute;
-      z-index: 1;
-      font-size: 9px;
-      opacity: .45;
-    }
-
-    .lp1 { top: 4px; left: 7px; }
-    .lp2 { top: 9px; right: 7px; }
-    .lp3 { bottom: 5px; left: 13px; }
-    .lp4 { bottom: 3px; right: 18px; }
-    .lp5 { top: 27px; left: 2px; }
-    .lp6 { top: 30px; right: 3px; }
-
-    .home-posts {
-      margin-top: 25px;
-    }
-
-    .home-post {
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 18px;
-      padding: 12px;
-      margin-bottom: 18px;
-      overflow: hidden;
-    }
-
-    .home-post-media {
+    .work-cover {
       width: 100%;
-      aspect-ratio: 4 / 5;
-      border-radius: 14px;
+      aspect-ratio: 2 / 3;
+      border-radius: 13px;
       overflow: hidden;
-      background: #eee;
-    }
-
-    .home-post-media img,
-    .home-post-media video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .home-post-caption {
-      padding: 12px 5px 5px;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .home-post-author {
-      font-weight: bold;
-      margin-bottom: 6px;
-    }
-
-    .home-empty {
+      background: linear-gradient(145deg,#ffd7e6,#f3a9c7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 30px 15px;
+      color: white;
+      font-weight: 900;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.10);
+    }
+
+    .work-cover.purple {
+      background: linear-gradient(145deg,#d8c4ef,#9877bd);
+    }
+
+    .work-cover.blue {
+      background: linear-gradient(145deg,#c9e8f7,#72abc9);
+    }
+
+    .work-cover.dark {
+      background: linear-gradient(145deg,#706074,#302735);
+    }
+
+    .work-name {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .work-info {
+      display: block;
+      margin-top: 3px;
       color: #888;
-      border: 1px dashed #ccc;
-      border-radius: 18px;
+      font-size: 11px;
     }
 
-    body.dark .home-post {
+    /* DESTAQUES */
+
+    .featured-list {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+      scrollbar-width: none;
+    }
+
+    .featured-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    .featured-card {
+      flex: 0 0 145px;
+    }
+
+    .featured-cover {
+      width: 145px;
+      height: 205px;
+      border-radius: 15px;
+      background: linear-gradient(145deg,#f9c1d8,#d95b8c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      font-weight: 900;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    /* MINHU */
+
+    .minhu-box {
+      margin-top: 25px;
+      padding: 17px;
+      border-radius: 20px;
+      background: rgba(255,240,246,.85);
+      border: 1px solid #f1d6e2;
+    }
+
+    .minhu-box h2 {
+      margin: 0 0 6px;
+      color: #d94b82;
+      font-size: 19px;
+    }
+
+    .minhu-box p {
+      margin: 0 0 12px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .minhu-box button {
+      border: none;
+      border-radius: 14px;
+      padding: 10px 15px;
+      background: #d94b82;
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* TEMA ESCURO */
+
+    body.dark .search-box input {
       background: #1b1b1b;
+      color: white;
       border-color: #333;
-      color: #fff;
     }
 
-    body.dark .home-empty {
-      border-color: #444;
+    body.dark .config-btn,
+    body.dark .category-btn {
+      background: #292029;
+      color: #f2a6c7;
+    }
+
+    body.dark .category-btn.active {
+      background: #d94b82;
+      color: white;
+    }
+
+    body.dark .work-info {
       color: #aaa;
     }
-  </style></head><body>  <header class="home-header"><div class="app-logo">
 
-  <span class="logo-pimenta lp1">🌶️</span>
-  <span class="logo-pimenta lp2">🌶️</span>
-  <span class="logo-pimenta lp3">🌶️</span>
-  <span class="logo-pimenta lp4">🌶️</span>
-  <span class="logo-pimenta lp5">🌶️</span>
-  <span class="logo-pimenta lp6">🌶️</span>
+    body.dark .minhu-box {
+      background: #281d24;
+      border-color: #4a303d;
+    }
 
-  <div class="logo-casal">
+    body.dark .minhu-box p {
+      color: #bbb;
+    }
+  </style></head><body>  <!-- CABEÇALHO -->  <header class="scan-header"><div class="scan-top">
 
-    <div class="chibi chibi-menino">
-      <div class="chibi-cabelo"></div>
-      <div class="chibi-cabeca"></div>
-      <div class="chibi-olhos">● ●</div>
-      <div class="chibi-corpo"></div>
-    </div>
-
-    <div class="chibi">
-      <div class="chibi-cabelo"></div>
-      <div class="chibi-cabeca"></div>
-      <div class="chibi-olhos">● ●</div>
-      <div class="chibi-corpo"></div>
-    </div>
-
+  <div class="scan-title">
+    ✦ Meu Manhwa
   </div>
 
-  <span class="logo-nome">MEU MANHWA</span>
+  <button
+    class="config-btn"
+    onclick="openScreen('configuracoes.html')"
+    aria-label="Configurações">
+    ⚙️
+  </button>
 
 </div>
 
-<div class="header-actions">
-  <button>⌕</button>
-  <button onclick="openScreen('perfil.html')">♙</button>
+<!-- PESQUISA -->
+
+<div class="search-box">
+
+  <span class="search-icon">⌕</span>
+
+  <input
+    type="search"
+    id="pesquisaObras"
+    placeholder="Pesquisar obras..."
+    oninput="pesquisarObras()">
+
 </div>
 
-  </header>  <main class="home"><section class="hero">
-  <div class="sketch sketch-1">♡</div>
-  <div class="sketch sketch-2">✦</div>
-  <div class="sketch sketch-3">♢</div>
-  <div class="sketch sketch-4">♡</div>
-  <div class="sketch sketch-5">✧</div>
+<!-- CATEGORIAS -->
 
-  <div class="hero-text">
-    <span>SEU UNIVERSO</span>
+<div class="categories">
 
-    <h1>Leia.<br>Crie.<br>Viva histórias.</h1>
+  <button
+    class="category-btn active"
+    onclick="filtrarCategoria('todos', this)">
+    Todos
+  </button>
 
-    <p>
-      Descubra novos manhwas e acompanhe suas histórias favoritas.
-    </p>
+  <button
+    class="category-btn"
+    onclick="filtrarCategoria('manhwa', this)">
+    Manhwa
+  </button>
 
-    <button
-      class="discover-btn"
-      onclick="openScreen('descobrir.html')">
-      Descobrir manhwas →
-    </button>
-  </div>
+  <button
+    class="category-btn"
+    onclick="filtrarCategoria('manhua', this)">
+    Manhua
+  </button>
 
-  <div class="couples">
-    <div class="couple c1">♧ ♡ ♧</div>
-    <div class="couple c2">♧ ♡ ♧</div>
-    <div class="couple c3">♧ ♡ ♧</div>
-    <div class="couple c4">♧ ♡ ♧</div>
-    <div class="couple c5">♧ ♡ ♧</div>
-    <div class="couple c6">♧ ♡ ♧</div>
-  </div>
-</section>
+  <button
+    class="category-btn"
+    onclick="filtrarCategoria('manga', this)">
+    Mangá
+  </button>
 
-<section class="section home-posts">
+  <button
+    class="category-btn"
+    onclick="filtrarCategoria('novel', this)">
+    Novel
+  </button>
 
-  <div class="section-title">
-    <h2>Publicações recentes</h2>
+</div>
 
-    <button onclick="openScreen('feed.html')">
-      Ver tudo →
-    </button>
-  </div>
-
-  <div id="homePosts"></div>
-
-</section>
+  </header>  <main class="home"><!-- OBRAS -->
 
 <section class="section">
 
-  <div class="section-title">
+  <div class="catalog-title">
+
+    <h2>Obras</h2>
+
+    <button onclick="openScreen('descobrir.html')">
+      Ver tudo →
+    </button>
+
+  </div>
+
+  <div class="works-grid" id="worksGrid">
+
+    <article class="work-card" data-category="manhwa">
+      <div class="work-cover">
+        💕<br>
+        Romance
+      </div>
+      <span class="work-name">
+        Histórias de Romance
+      </span>
+      <span class="work-info">
+        Manhwa · BL
+      </span>
+    </article>
+
+
+    <article class="work-card" data-category="manhwa">
+      <div class="work-cover purple">
+        ✦<br>
+        BL
+      </div>
+      <span class="work-name">
+        Amor Proibido
+      </span>
+      <span class="work-info">
+        Manhwa · Romance
+      </span>
+    </article>
+
+
+    <article class="work-card" data-category="manhua">
+      <div class="work-cover blue">
+        ♢<br>
+        China
+      </div>
+      <span class="work-name">
+        Novo Destino
+      </span>
+      <span class="work-info">
+        Manhua
+      </span>
+    </article>
+
+
+    <article class="work-card" data-category="manga">
+      <div class="work-cover dark">
+        ♡<br>
+        Manga
+      </div>
+      <span class="work-name">
+        Entre Nós
+      </span>
+      <span class="work-info">
+        Mangá · Romance
+      </span>
+    </article>
+
+
+    <article class="work-card" data-category="novel">
+      <div class="work-cover">
+        📖<br>
+        Novel
+      </div>
+      <span class="work-name">
+        Minha História
+      </span>
+      <span class="work-info">
+        Novel
+      </span>
+    </article>
+
+
+    <article class="work-card" data-category="manhwa">
+      <div class="work-cover purple">
+        🌙<br>
+        Noite
+      </div>
+      <span class="work-name">
+        Depois da Chuva
+      </span>
+      <span class="work-info">
+        Manhwa
+      </span>
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- DESTAQUES -->
+
+<section class="section">
+
+  <div class="catalog-title">
+
     <h2>Em destaque</h2>
 
     <button onclick="openScreen('descobrir.html')">
       Ver tudo →
     </button>
+
   </div>
 
-  <div class="cards">
+  <div class="featured-list">
 
-    <div class="manhwa-card">
-      <div class="cover">♡</div>
-      <b>Histórias populares</b>
-      <small>Romance · BL</small>
+    <div class="featured-card">
+      <div class="featured-cover">
+        ♡<br><br>
+        Histórias populares
+      </div>
     </div>
 
-    <div class="manhwa-card">
-      <div class="cover">✦</div>
-      <b>Novos capítulos</b>
-      <small>Atualizados hoje</small>
+    <div class="featured-card">
+      <div class="featured-cover">
+        ✦<br><br>
+        Atualizados
+      </div>
     </div>
 
-    <div class="manhwa-card">
-      <div class="cover">♢</div>
-      <b>Para você</b>
-      <small>Recomendados</small>
+    <div class="featured-card">
+      <div class="featured-cover">
+        ♢<br><br>
+        Para você
+      </div>
     </div>
 
   </div>
 
 </section>
 
+
+<!-- MINHU SEPARADO -->
+
+<section class="section">
+
+  <div class="minhu-box">
+
+    <h2>🌶️ Minhu</h2>
+
+    <p>
+      Veja publicações, fotos e vídeos dos criadores.
+    </p>
+
+    <button onclick="openScreen('feed.html')">
+      Abrir Minhu →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- CONTINUE LENDO -->
+
 <section class="section latest">
 
   <div class="section-title">
+
     <h2>Continue lendo</h2>
 
     <button>
       Ver biblioteca →
     </button>
+
   </div>
 
   <div class="empty-reading">
+
     <span>✧</span>
 
     <h3>Nada por aqui ainda</h3>
@@ -315,18 +523,19 @@
     <p>
       Comece a ler um manhwa e ele aparecerá aqui.
     </p>
+
   </div>
 
 </section>
 
-  </main>  <nav class="bottom"><button class="active">
+  </main>  <!-- MENU INFERIOR -->  <nav class="bottom"><button class="active">
   ⌂
   <small>Início</small>
 </button>
 
 <button onclick="openScreen('feed.html')">
-  ♧
-  <small>Feed</small>
+  🌶️
+  <small>Minhu</small>
 </button>
 
 <button onclick="openScreen('descobrir.html')">
@@ -346,82 +555,67 @@
 
   </nav>  <script src="app.js"></script>  <script>
 
-    function carregarPublicacoesInicio() {
+    let categoriaAtual = "todos";
 
-      const area = document.getElementById("homePosts");
 
-      const publicacoes =
-        JSON.parse(
-          localStorage.getItem("minhas_publicacoes") || "[]"
-        );
+    function filtrarCategoria(categoria, botao) {
 
-      if (!publicacoes.length) {
+      categoriaAtual = categoria;
 
-        area.innerHTML = `
-          <div class="home-empty">
-            <div style="font-size:35px;">✦</div>
-            <strong>Nenhuma publicação ainda</strong>
-            <p>
-              As publicações dos criadores aparecerão aqui.
-            </p>
-          </div>
-        `;
+      document
+        .querySelectorAll(".category-btn")
+        .forEach(function(btn) {
+          btn.classList.remove("active");
+        });
 
-        return;
-      }
+      botao.classList.add("active");
 
-      area.innerHTML = publicacoes
-        .slice()
-        .reverse()
-        .map(function(post) {
-
-          let media = "";
-
-          if (post.type === "video") {
-
-            media = `
-              <video
-                src="${post.media}"
-                controls
-                playsinline>
-              </video>
-            `;
-
-          } else {
-
-            media = `
-              <img
-                src="${post.media}"
-                alt="Publicação">
-            `;
-          }
-
-          return `
-            <article class="home-post">
-
-              <div class="home-post-media">
-                ${media}
-              </div>
-
-              <div class="home-post-caption">
-
-                <div class="home-post-author">
-                  ${post.author || "Criador"}
-                </div>
-
-                ${post.caption || ""}
-
-              </div>
-
-            </article>
-          `;
-
-        })
-        .join("");
-
+      aplicarFiltros();
     }
 
-    carregarPublicacoesInicio();
+
+    function pesquisarObras() {
+      aplicarFiltros();
+    }
+
+
+    function aplicarFiltros() {
+
+      const texto =
+        document
+          .getElementById("pesquisaObras")
+          .value
+          .toLowerCase();
+
+      document
+        .querySelectorAll(".work-card")
+        .forEach(function(card) {
+
+          const nome =
+            card
+              .innerText
+              .toLowerCase();
+
+          const categoria =
+            card.dataset.category;
+
+          const correspondeCategoria =
+            categoriaAtual === "todos" ||
+            categoria === categoriaAtual;
+
+          const correspondePesquisa =
+            !texto ||
+            nome.includes(texto);
+
+          card.style.display =
+            correspondeCategoria &&
+            correspondePesquisa
+              ? ""
+              : "none";
+
+        });
+
+    }
 
   </script></body>
   </html>
