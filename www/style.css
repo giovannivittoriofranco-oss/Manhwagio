@@ -6,186 +6,292 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #fff;
-  color: #222;
-  padding-bottom: 80px;
+  color: #171717;
+  padding-bottom: 82px;
 }
 
-.top {
-  height: 58px;
-  background: #171717;
-  color: white;
+/* CABEÇALHO */
+
+.home-header {
+  height: 64px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
 }
 
-.icon-btn,
-.simple {
-  background: none;
+.app-logo {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.header-actions button {
   border: 0;
-  color: inherit;
+  background: transparent;
   font-size: 25px;
+  padding: 8px;
 }
 
-main {
-  max-width: 900px;
+/* TELA PRINCIPAL */
+
+.home {
+  max-width: 1000px;
   margin: auto;
-  padding: 20px;
-}
-
-.brand-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.mascot {
-  font-size: 42px;
-}
-
-.logo {
-  font-size: 25px;
-  font-weight: bold;
-}
-
-.top-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.notice {
-  margin-top: 25px;
-  background: #f7f7f7;
-  border-radius: 18px;
-  padding: 20px;
-  position: relative;
-}
-
-.notice h2 {
-  margin-top: 0;
-}
-
-.understood {
-  position: absolute;
-  right: 18px;
-  top: 18px;
-  border: 0;
-  border-radius: 20px;
-  padding: 8px 15px;
-  background: #222;
-  color: white;
-}
-
-.notice-card {
-  background: white;
-  border-radius: 14px;
-  padding: 14px;
-  margin-top: 12px;
-}
-
-.notice-card p {
-  margin-bottom: 0;
-  color: #666;
-  line-height: 1.4;
-}
-
-.tools {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 20px 0;
-}
-
-.tool {
-  border: 1px solid #ddd;
-  border-radius: 16px;
   padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 }
 
-.tool span {
-  font-size: 25px;
+/* ÁREA PRINCIPAL */
+
+.hero {
+  min-height: 430px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid #eee;
+  background: #fff;
+  padding: 45px 30px;
 }
 
-.tool small {
+/* TEXTO */
+
+.hero-text {
+  position: relative;
+  z-index: 3;
+  max-width: 430px;
+}
+
+.hero-text span {
+  font-size: 11px;
+  letter-spacing: 3px;
   color: #777;
 }
 
-.works h1 {
+.hero-text h1 {
+  font-size: 48px;
+  line-height: 1;
+  margin: 12px 0;
+}
+
+.hero-text p {
+  color: #666;
+  line-height: 1.5;
+  max-width: 330px;
+}
+
+.discover-btn {
+  margin-top: 12px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 14px;
+  background: #171717;
+  color: white;
+  font-weight: bold;
+}
+
+/* DESENHOS PEQUENOS */
+
+.couples {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.couple {
+  position: absolute;
+  color: #888;
+  opacity: .55;
+  font-size: 35px;
+  transform: rotate(-8deg);
+  letter-spacing: -10px;
+}
+
+.c1 {
+  top: 35px;
+  right: 30px;
+}
+
+.c2 {
+  top: 150px;
+  right: 80px;
+  transform: rotate(8deg) scale(.8);
+}
+
+.c3 {
+  bottom: 35px;
+  right: 35px;
+  transform: rotate(-12deg) scale(.7);
+}
+
+.c4 {
+  bottom: 90px;
+  left: 45%;
+  transform: rotate(10deg) scale(.65);
+}
+
+.c5 {
+  top: 45px;
+  left: 48%;
+  transform: rotate(-15deg) scale(.6);
+}
+
+.c6 {
+  bottom: 25px;
+  left: 25px;
+  transform: rotate(7deg) scale(.75);
+}
+
+/* ESTRELAS E RABISCOS */
+
+.sketch {
+  position: absolute;
+  color: #999;
+  opacity: .65;
+  font-size: 25px;
+}
+
+.sketch-1 {
+  top: 20px;
+  left: 30px;
+}
+
+.sketch-2 {
+  top: 100px;
+  right: 40%;
+}
+
+.sketch-3 {
+  bottom: 30px;
+  right: 45%;
+}
+
+.sketch-4 {
+  bottom: 120px;
+  left: 30%;
+}
+
+.sketch-5 {
+  top: 45%;
+  right: 20px;
+}
+
+/* SEÇÕES */
+
+.section {
+  margin-top: 35px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 15px;
 }
 
-.buttons {
-  display: flex;
-  gap: 10px;
+.section-title h2 {
+  margin: 0;
+  font-size: 22px;
 }
 
-button {
-  cursor: pointer;
-}
-
-.primary,
-.secondary,
-.cancel {
+.section-title button {
   border: 0;
-  border-radius: 12px;
-  padding: 13px 18px;
-  font-weight: bold;
+  background: transparent;
+  color: #666;
 }
 
-.primary {
-  background: #171717;
-  color: white;
+/* CARDS */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
 }
 
-.secondary {
-  background: #eee;
-  color: #222;
+.manhwa-card {
+  border: 1px solid #eee;
+  border-radius: 18px;
+  padding: 10px;
+  background: white;
 }
 
-.empty {
-  text-align: center;
-  padding: 50px 20px;
+.cover {
+  height: 150px;
+  border-radius: 13px;
+  background: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
   color: #777;
+  margin-bottom: 10px;
 }
 
-.empty div {
-  font-size: 55px;
+.manhwa-card b,
+.manhwa-card small {
+  display: block;
 }
+
+.manhwa-card small {
+  color: #888;
+  margin-top: 5px;
+}
+
+/* CONTINUE LENDO */
+
+.empty-reading {
+  border: 1px dashed #ccc;
+  border-radius: 18px;
+  padding: 35px 20px;
+  text-align: center;
+}
+
+.empty-reading span {
+  font-size: 35px;
+  color: #888;
+}
+
+.empty-reading h3 {
+  margin-bottom: 5px;
+}
+
+.empty-reading p {
+  color: #888;
+}
+
+/* MENU INFERIOR */
 
 .bottom {
   position: fixed;
+  z-index: 10;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 68px;
-  background: white;
+  height: 72px;
+  background: rgba(255,255,255,.97);
   border-top: 1px solid #ddd;
   display: flex;
   justify-content: space-around;
-  z-index: 10;
+  align-items: center;
 }
 
 .bottom button {
   border: 0;
-  background: none;
-  font-size: 22px;
+  background: transparent;
   color: #777;
+  font-size: 21px;
 }
 
 .bottom small {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
+  margin-top: 3px;
 }
 
 .bottom .active {
@@ -193,141 +299,32 @@ button {
   font-weight: bold;
 }
 
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  z-index: 20;
-  overflow-y: auto;
-  padding: 20px;
-}
-
-.modal {
-  max-width: 700px;
-  margin: 20px auto;
-  background: white;
-  border-radius: 20px;
-  padding: 22px;
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  right: 15px;
-  top: 12px;
-  border: 0;
-  background: none;
-  font-size: 28px;
-}
-
-.uploads,
-.two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-.uploads label,
-.field {
-  display: block;
-  margin-top: 15px;
-}
-
-.field span,
-.uploads label > span {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 7px;
-}
-
-.upload-box {
-  border: 2px dashed #bbb;
-  border-radius: 14px;
-  min-height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  color: #777;
-}
-
-.upload-box.banner {
-  min-height: 120px;
-}
-
-input[type="file"] {
-  display: none;
-}
-
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  font-size: 15px;
-}
-
-textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-
-.choice-row,
-.ratings {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.choice,
-.ratings button {
-  border: 1px solid #ccc;
-  background: white;
-  border-radius: 10px;
-  padding: 10px 14px;
-}
-
-.choice.selected {
-  background: #222;
-  color: white;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.cancel {
-  background: #eee;
-}
+/* CELULAR */
 
 @media (max-width: 600px) {
-  main {
-    padding: 14px;
+
+  .home {
+    padding: 12px;
   }
 
-  .tools,
-  .uploads,
-  .two {
-    grid-template-columns: 1fr;
+  .hero {
+    min-height: 470px;
+    padding: 30px 22px;
   }
 
-  .buttons {
-    flex-direction: column;
+  .hero-text h1 {
+    font-size: 40px;
   }
 
-  .notice {
-    padding: 15px;
+  .cards {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .understood {
-    position: static;
-    margin-bottom: 10px;
+  .cover {
+    height: 130px;
+  }
+
+  .couple {
+    font-size: 27px;
   }
   }
