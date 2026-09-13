@@ -43,3 +43,6 @@ function createWork() {
 
   closeModal();
 }
+function openScreen(screen) {
+  window.location.href = screen;
+    }
