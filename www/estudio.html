@@ -1,756 +1,437 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meu Estúdio</title>
-
-<style>
-*{
-  box-sizing:border-box;
-}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meu Estúdio</title><style>
+*{box-sizing:border-box}
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#f7f7f7;
-  color:#171717;
-  padding-bottom:85px;
+margin:0;
+font-family:Arial,sans-serif;
+background:#fff;
+color:#171717;
+padding-bottom:85px
 }
 
 header{
-  background:#fff;
-  padding:20px;
-  border-bottom:1px solid #e5e5e5;
-  position:sticky;
-  top:0;
-  z-index:10;
+height:64px;
+display:flex;
+align-items:center;
+padding:0 18px;
+border-bottom:1px solid #eee;
+gap:15px;
+position:sticky;
+top:0;
+background:#fff;
+z-index:5
+}
+
+.back{
+border:0;
+background:none;
+font-size:28px;
+cursor:pointer
 }
 
 header h1{
-  margin:0;
-  font-size:25px;
+font-size:20px;
+margin:0
 }
 
-header p{
-  margin:6px 0 0;
-  color:#777;
-  font-size:14px;
+main{
+max-width:800px;
+margin:auto;
+padding:20px
 }
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:18px;
+.add{
+width:100%;
+padding:17px;
+border:0;
+border-radius:16px;
+background:#171717;
+color:white;
+font-size:16px;
+font-weight:bold;
+cursor:pointer
 }
 
-/* BOTÃO ADICIONAR */
-
-.add-button{
-  width:100%;
-  border:0;
-  background:#171717;
-  color:#fff;
-  padding:17px;
-  border-radius:16px;
-  font-size:16px;
-  font-weight:bold;
-  margin-bottom:25px;
+.obras{
+margin-top:25px
 }
 
-/* LISTA */
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
+.obra{
+border:1px solid #e5e5e5;
+border-radius:18px;
+padding:12px;
+margin-bottom:15px;
+display:flex;
+gap:14px;
+background:white
 }
 
-.section-title h2{
-  margin:0;
-  font-size:20px;
+.obra img{
+width:90px;
+height:125px;
+object-fit:cover;
+border-radius:12px;
+background:#eee
 }
 
-.counter{
-  color:#888;
-  font-size:13px;
+.obra-info{
+flex:1
 }
 
-.works{
-  display:grid;
-  gap:14px;
+.obra-info h3{
+margin:5px 0 8px
 }
 
-.work{
-  background:#fff;
-  border:1px solid #e5e5e5;
-  border-radius:18px;
-  padding:12px;
-  display:flex;
-  gap:14px;
-  align-items:center;
+.obra-info p{
+color:#777;
+font-size:14px
 }
-
-.work-cover{
-  width:82px;
-  height:112px;
-  border-radius:12px;
-  background:#eee;
-  overflow:hidden;
-  flex-shrink:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-}
-
-.work-cover img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.work-info{
-  flex:1;
-}
-
-.work-info h3{
-  margin:0 0 7px;
-  font-size:17px;
-}
-
-.work-info p{
-  margin:4px 0;
-  color:#777;
-  font-size:13px;
-}
-
-.tag{
-  display:inline-block;
-  background:#eee;
-  padding:5px 8px;
-  border-radius:8px;
-  font-size:11px;
-  margin-top:6px;
-}
-
-/* VAZIO */
-
-.empty{
-  background:#fff;
-  border:1px dashed #ccc;
-  border-radius:18px;
-  text-align:center;
-  padding:45px 20px;
-  color:#777;
-}
-
-.empty-icon{
-  font-size:40px;
-  margin-bottom:10px;
-}
-
-/* MODAL */
 
 .modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  z-index:50;
-  overflow-y:auto;
-  padding:20px;
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+z-index:20;
+overflow:auto
 }
 
-.modal-box{
-  background:#fff;
-  max-width:650px;
-  margin:20px auto;
-  border-radius:24px;
-  padding:22px;
+.box{
+background:white;
+width:92%;
+max-width:600px;
+margin:30px auto;
+padding:22px;
+border-radius:22px
 }
 
-.modal-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
+.box h2{
+margin-top:0
 }
-
-.modal-header h2{
-  margin:0;
-}
-
-.close{
-  border:0;
-  background:#eee;
-  border-radius:50%;
-  width:36px;
-  height:36px;
-  font-size:20px;
-}
-
-/* TIPO */
-
-.type-buttons{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
-}
-
-.type-buttons button{
-  flex:1;
-  padding:14px;
-  border:1px solid #ddd;
-  background:#fff;
-  border-radius:12px;
-  font-weight:bold;
-}
-
-.type-buttons button.selected{
-  background:#171717;
-  color:#fff;
-}
-
-/* FORM */
 
 label{
-  display:block;
-  font-weight:bold;
-  font-size:14px;
-  margin:17px 0 7px;
+display:block;
+font-size:14px;
+font-weight:bold;
+margin-top:15px;
+margin-bottom:6px
 }
 
-input,
-textarea,
-select{
-  width:100%;
-  padding:13px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  font-family:Arial,sans-serif;
-  font-size:14px;
-  background:#fff;
+input,textarea,select{
+width:100%;
+padding:13px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:15px
 }
 
 textarea{
-  min-height:100px;
-  resize:vertical;
-}
-
-.file-box{
-  border:2px dashed #ccc;
-  border-radius:14px;
-  padding:18px;
-  text-align:center;
-  background:#fafafa;
+min-height:100px;
+resize:vertical
 }
 
 .preview{
-  margin-top:10px;
-  display:none;
-  text-align:center;
+width:120px;
+height:160px;
+border-radius:12px;
+background:#f1f1f1;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+margin-top:8px
 }
 
 .preview img{
-  max-width:100%;
-  max-height:180px;
-  border-radius:12px;
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:20px
+}
+
+.actions button{
+flex:1;
+padding:14px;
+border:0;
+border-radius:13px;
+font-weight:bold
+}
+
+.cancel{
+background:#eee
 }
 
 .save{
-  width:100%;
-  margin-top:25px;
-  padding:16px;
-  border:0;
-  border-radius:14px;
-  background:#171717;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
+background:#171717;
+color:white
 }
 
-/* NAVEGAÇÃO */
+.empty{
+text-align:center;
+padding:45px 15px;
+color:#888
+}
 
 .bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:75px;
-  background:#fff;
-  border-top:1px solid #ddd;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  z-index:20;
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+height:72px;
+background:white;
+border-top:1px solid #ddd;
+display:flex;
+justify-content:space-around;
+align-items:center;
+z-index:10
 }
 
 .bottom button{
-  border:0;
-  background:none;
-  color:#777;
-  font-size:20px;
+border:0;
+background:none;
+color:#777;
+font-size:21px
 }
 
 .bottom small{
-  display:block;
-  font-size:10px;
-  margin-top:4px;
+display:block;
+font-size:10px;
+margin-top:3px
 }
 
 .bottom .active{
-  color:#111;
-  font-weight:bold;
+color:#111;
+font-weight:bold
 }
-</style>
-</head>
+</style></head><body><header>
+<button class="back" onclick="history.back()">←</button>
+<h1>Meu Estúdio</h1>
+</header><main><button class="add" onclick="abrirFormulario()">
+＋ Adicionar Nova Obra
+</button><div class="obras" id="obras"></div></main><div class="modal" id="modal"><div class="box"><h2>Nova obra</h2><label>Tipo</label>
+<select id="tipo">
 
-<body>
+<option>Manhwa</option>
+<option>Manhua</option>
+<option>Mangá</option>
+<option>Novel</option>
+</select><label>Título</label>
+<input id="titulo" placeholder="Nome da obra">
 
-<header>
-  <h1>Meu Estúdio</h1>
-  <p>Organize suas histórias e publique suas obras.</p>
-</header>
+<label>Introdução</label>
 
-<div class="container">
+<textarea id="introducao" placeholder="Uma breve introdução"></textarea><label>Descrição</label>
 
-  <button class="add-button" onclick="openModal()">
-    ＋ Adicionar Nova Obra
-  </button>
+<textarea id="descricao" placeholder="Descrição da história"></textarea><label>Gêneros</label>
+<input id="generos" placeholder="Romance, BL, Drama...">
 
-  <div class="section-title">
-    <h2>Lista de obras</h2>
-    <span class="counter" id="counter">0 obras</span>
-  </div>
+<label>Classificação</label>
+<select id="idade">
 
-  <div id="works" class="works">
+<option>Livre</option>
+<option>10 anos</option>
+<option>12 anos</option>
+<option>14 anos</option>
+<option>16 anos</option>
+<option>18 anos</option>
+</select><label>Capa</label>
+<input type="file" id="capa" accept="image/*" onchange="mostrarCapa(event)">
 
-    <div class="empty" id="empty">
-      <div class="empty-icon">✦</div>
-      <strong>Nenhuma obra adicionada</strong>
-      <p>Adicione um manhwa ou uma novel para começar sua biblioteca.</p>
-    </div>
+<div class="preview" id="preview">
+Capa
+</div><div class="actions">
+<button class="cancel" onclick="fecharFormulario()">Cancelar</button>
+<button class="save" onclick="salvarObra()">Salvar obra</button>
+</div></div>
+</div><nav class="bottom"><button onclick="location.href='index.html'">
+⌂
+<small>Início</small>
+</button><button onclick="location.href='feed.html'">
+♧
+<small>Feed</small>
+</button><button onclick="location.href='descobrir.html'">
+◈
+<small>Descobrir</small>
+</button><button class="active">
+▣
+<small>Meu Estúdio</small>
+</button><button onclick="location.href='perfil.html'">
+♙
+<small>Perfil</small>
+</button></nav><script>
 
-  </div>
+let capaAtual="";
+
+function abrirFormulario(){
+document.getElementById("modal").style.display="block";
+}
+
+function fecharFormulario(){
+document.getElementById("modal").style.display="none";
+}
+
+function mostrarCapa(event){
+
+const arquivo=event.target.files[0];
+
+if(!arquivo)return;
+
+const leitor=new FileReader();
+
+leitor.onload=function(e){
+
+capaAtual=e.target.result;
+
+document.getElementById("preview").innerHTML=
+'<img src="'+capaAtual+'">';
+
+};
+
+leitor.readAsDataURL(arquivo);
+}
+
+
+function salvarObra(){
+
+const titulo=document.getElementById("titulo").value.trim();
+
+if(!titulo){
+alert("Digite o título da obra.");
+return;
+}
+
+const obra={
+
+id:Date.now(),
+
+tipo:document.getElementById("tipo").value,
+
+titulo:titulo,
+
+introducao:document.getElementById("introducao").value,
+
+descricao:document.getElementById("descricao").value,
+
+generos:document.getElementById("generos").value,
+
+idade:document.getElementById("idade").value,
+
+capa:capaAtual,
+
+data:Date.now()
+
+};
+
+const obras=JSON.parse(localStorage.getItem("minhas_obras")||"[]");
+
+obras.push(obra);
+
+localStorage.setItem("minhas_obras",JSON.stringify(obras));
+
+fecharFormulario();
+
+limparFormulario();
+
+mostrarObras();
+
+alert("Obra salva com sucesso!");
+
+}
+
+
+function mostrarObras(){
+
+const obras=JSON.parse(localStorage.getItem("minhas_obras")||"[]");
+
+const container=document.getElementById("obras");
+
+if(obras.length===0){
+
+container.innerHTML=
+'<div class="empty">Você ainda não criou nenhuma obra.</div>';
+
+return;
+
+}
+
+container.innerHTML="";
+
+obras.forEach(obra=>{
+
+const div=document.createElement("div");
+
+div.className="obra";
+
+div.innerHTML=`
+
+${obra.capa
+? '<img src="'+obra.capa+'">'
+: '<div style="width:90px;height:125px;border-radius:12px;background:#eee;display:flex;align-items:center;justify-content:center">♡</div>'
+}
+
+<div class="obra-info">
+
+<small>${obra.tipo}</small>
+
+<h3>${escapeHTML(obra.titulo)}</h3>
+
+<p>${escapeHTML(obra.introducao||obra.descricao||"Sem descrição.")}</p>
+
+<small>${escapeHTML(obra.generos||"")}</small>
 
 </div>
+`;
 
+container.appendChild(div);
 
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-      <h2>Nova Obra</h2>
-      <button class="close" onclick="closeModal()">×</button>
-    </div>
-
-    <label>Tipo de obra</label>
-
-    <div class="type-buttons">
-      <button id="manhwaBtn"
-              class="selected"
-              onclick="selectType('Manhwa')">
-        📖 Manhwa
-      </button>
-
-      <button id="novelBtn"
-              onclick="selectType('Novel')">
-        ✎ Novel
-      </button>
-    </div>
-
-    <input type="hidden" id="type" value="Manhwa">
-
-
-    <label>Título</label>
-    <input id="title"
-           type="text"
-           placeholder="Nome da sua obra">
-
-
-    <label>Introdução</label>
-    <textarea id="intro"
-              placeholder="Apresente sua história ao leitor..."></textarea>
-
-
-    <label>Descrição</label>
-    <textarea id="description"
-              placeholder="Escreva uma descrição da obra..."></textarea>
-
-
-    <label>Gêneros</label>
-    <input id="genres"
-           type="text"
-           placeholder="Ex.: BL, Romance, Drama, Ação">
-
-
-    <label>Classificação indicativa</label>
-
-    <select id="rating">
-      <option value="Livre">Livre</option>
-      <option value="10">10 anos</option>
-      <option value="12">12 anos</option>
-      <option value="14">14 anos</option>
-      <option value="16">16 anos</option>
-      <option value="18">18 anos</option>
-    </select>
-
-
-    <label>Formato / tamanho</label>
-
-    <select id="format">
-      <option>Vertical longo</option>
-      <option>Vertical enorme</option>
-      <option>Páginas separadas</option>
-      <option>Rolagem contínua</option>
-      <option>Paginação</option>
-    </select>
-
-
-    <label>Capa vertical</label>
-
-    <div class="file-box">
-      <input id="cover"
-             type="file"
-             accept="image/*"
-             onchange="previewImage(this,'coverPreview')">
-
-      <div id="coverPreview" class="preview"></div>
-    </div>
-
-
-    <label>Banner horizontal</label>
-
-    <div class="file-box">
-      <input id="banner"
-             type="file"
-             accept="image/*"
-             onchange="previewImage(this,'bannerPreview')">
-
-      <div id="bannerPreview" class="preview"></div>
-    </div>
-
-
-    <div id="manhwaOptions">
-
-      <label>Arquivo do Manhwa</label>
-
-      <div class="file-box">
-        <input id="pdf"
-               type="file"
-               accept="application/pdf">
-
-        <p style="color:#777;font-size:12px">
-          Selecione o PDF completo do seu manhwa,
-          mesmo que seja muito grande.
-        </p>
-      </div>
-
-    </div>
-
-
-    <div id="novelOptions" style="display:none">
-
-      <label>Texto da Novel</label>
-
-      <textarea id="novelText"
-                style="min-height:180px"
-                placeholder="Comece a escrever ou cole aqui sua história..."></textarea>
-
-    </div>
-
-
-    <button class="save" onclick="createWork()">
-      ✓ Adicionar obra ao Estúdio
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- BARRA INFERIOR -->
-
-<nav class="bottom">
-
-  <button onclick="go('index.html')">
-    ⌂
-    <small>Início</small>
-  </button>
-
-  <button onclick="go('feed.html')">
-    ♡
-    <small>Feed</small>
-  </button>
-
-  <button onclick="go('descobrir.html')">
-    ◈
-    <small>Descobrir</small>
-  </button>
-
-  <button class="active">
-    ▣
-    <small>Meu Estúdio</small>
-  </button>
-
-  <button onclick="go('perfil.html')">
-    ♙
-    <small>Perfil</small>
-  </button>
-
-</nav>
-
-
-<script>
-
-let works = [];
-
-
-/* ABRIR MODAL */
-
-function openModal(){
-  document.getElementById("modal").style.display="block";
-}
-
-
-/* FECHAR */
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-
-/* TIPO */
-
-function selectType(type){
-
-  document.getElementById("type").value=type;
-
-  const manhwaBtn=document.getElementById("manhwaBtn");
-  const novelBtn=document.getElementById("novelBtn");
-
-  const manhwaOptions=document.getElementById("manhwaOptions");
-  const novelOptions=document.getElementById("novelOptions");
-
-  if(type==="Manhwa"){
-
-    manhwaBtn.classList.add("selected");
-    novelBtn.classList.remove("selected");
-
-    manhwaOptions.style.display="block";
-    novelOptions.style.display="none";
-
-  }else{
-
-    novelBtn.classList.add("selected");
-    manhwaBtn.classList.remove("selected");
-
-    manhwaOptions.style.display="none";
-    novelOptions.style.display="block";
-  }
-}
-
-
-/* PREVIEW DAS IMAGENS */
-
-function previewImage(input,id){
-
-  const file=input.files[0];
-
-  if(!file) return;
-
-  const box=document.getElementById(id);
-
-  box.style.display="block";
-
-  box.innerHTML="";
-
-  const img=document.createElement("img");
-
-  img.src=URL.createObjectURL(file);
-
-  box.appendChild(img);
-}
-
-
-/* CRIAR OBRA */
-
-function createWork(){
-
-  const title=document.getElementById("title").value.trim();
-
-  if(!title){
-
-    alert("Digite o título da obra.");
-
-    return;
-  }
-
-  const type=document.getElementById("type").value;
-
-  const intro=document.getElementById("intro").value.trim();
-
-  const description=document.getElementById("description").value.trim();
-
-  const genres=document.getElementById("genres").value.trim();
-
-  const rating=document.getElementById("rating").value;
-
-  const format=document.getElementById("format").value;
-
-  const coverInput=document.getElementById("cover");
-
-  let coverURL="";
-
-  if(coverInput.files.length){
-
-    coverURL=URL.createObjectURL(coverInput.files[0]);
-
-  }
-
-  const work={
-
-    title:title,
-
-    type:type,
-
-    intro:intro,
-
-    description:description,
-
-    genres:genres,
-
-    rating:rating,
-
-    format:format,
-
-    cover:coverURL
-
-  };
-
-  works.push(work);
-
-  renderWorks();
-
-  closeModal();
-
-  clearForm();
-}
-
-
-/* MOSTRAR OBRAS */
-
-function renderWorks(){
-
-  const container=document.getElementById("works");
-
-  container.innerHTML="";
-
-  document.getElementById("counter").textContent=
-    works.length+" obra"+(works.length===1?"":"s");
-
-  if(works.length===0){
-
-    container.innerHTML=`
-      <div class="empty">
-        <div class="empty-icon">✦</div>
-        <strong>Nenhuma obra adicionada</strong>
-        <p>Adicione um manhwa ou uma novel para começar sua biblioteca.</p>
-      </div>
-    `;
-
-    return;
-  }
-
-  works.forEach(function(work){
-
-    const card=document.createElement("div");
-
-    card.className="work";
-
-    card.innerHTML=`
-
-      <div class="work-cover">
-
-        ${
-          work.cover
-          ? `<img src="${work.cover}">`
-          : "♡"
-        }
-
-      </div>
-
-      <div class="work-info">
-
-        <h3>${escapeHTML(work.title)}</h3>
-
-        <p>${work.type} · ${work.rating}</p>
-
-        <p>${escapeHTML(work.genres || "Sem gêneros definidos")}</p>
-
-        <span class="tag">${escapeHTML(work.format)}</span>
-
-      </div>
-
-    `;
-
-    container.appendChild(card);
-
-  });
+});
 
 }
 
 
-/* LIMPAR FORMULÁRIO */
+function limparFormulario(){
 
-function clearForm(){
+document.getElementById("titulo").value="";
+document.getElementById("introducao").value="";
+document.getElementById("descricao").value="";
+document.getElementById("generos").value="";
+document.getElementById("capa").value="";
+document.getElementById("preview").innerHTML="Capa";
 
-  document.getElementById("title").value="";
-  document.getElementById("intro").value="";
-  document.getElementById("description").value="";
-  document.getElementById("genres").value="";
-  document.getElementById("cover").value="";
-  document.getElementById("banner").value="";
-  document.getElementById("pdf").value="";
-  document.getElementById("novelText").value="";
+capaAtual="";
 
-  document.getElementById("coverPreview").innerHTML="";
-  document.getElementById("bannerPreview").innerHTML="";
-
-  document.getElementById("coverPreview").style.display="none";
-  document.getElementById("bannerPreview").style.display="none";
-
-  selectType("Manhwa");
 }
 
-
-/* SEGURANÇA DO TEXTO */
 
 function escapeHTML(text){
 
-  return text
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
+return String(text).replace(/[&<>"']/g,function(m){
 
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m];
 
-/* NAVEGAÇÃO */
-
-function go(page){
-
-  window.location.href=page;
+});
 
 }
 
-</script>
 
-</body>
+mostrarObras();
+
+</script></body>
   </html>
